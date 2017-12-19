@@ -1,10 +1,10 @@
 # teamgrape
 
-# Codestandard:
+# Codestandard
 Bootstrap 4.
 two spaces for tab.
 
-# Daily Scrum:
+# Daily Scrum
 Måndag - torsdag.
 Ca 10 - 15min.
 Klockan 10:00 på dagar utan lektion.
@@ -16,8 +16,7 @@ Frågor:
 - Vad hindrar mig?
 
 
-
-# Scrummaster:
+# Scrummaster
 vecka 2: Nicklas.
 vecka 3: David.
 Vecka 4: Christopher.
@@ -27,7 +26,7 @@ Vecka 7: Obed.
 Vecka 8: Nicklas.
 Vecka 9: Jesse.
 
-# Release:
+# Release
 Release 1, vecka 7.
 Release 2, vecka 9.
 
