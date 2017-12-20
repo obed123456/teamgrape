@@ -2,7 +2,8 @@
 
 # Codestandard
 Bootstrap 4.
-two spaces for tab.
+Two spaces for tab.
+CamelCase for html & js.
 
 # Daily Scrum
 Måndag - torsdag.
