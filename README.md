@@ -31,3 +31,13 @@ Vecka 9: Jesse.
 Release 1, vecka 7.
 Release 2, vecka 9.
 
+## Installation
+
+- Download git folder: || git clone https://github.com/obed123456/teamgrape
+- Write "git init".
+- Create your branch || git checkout -b
+- Write "git status".
+- Write git add .filename / "folder name"
+- Write git commit -m "write comment"
+- Submit changes to Github. || git push --set-upstream origin "your_branch"
+- Try this if you are not connected to staging || git branch --set-upstream-to = origin / staging
