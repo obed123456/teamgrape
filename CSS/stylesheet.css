@@ -1,6 +1,14 @@
+body{
+  background-color: #F5B041  ;
+}
 .v-height {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.vh-height {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
