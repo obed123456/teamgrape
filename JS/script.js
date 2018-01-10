@@ -1,10 +1,3 @@
-//
-//var user = { 
-//    username: "team", 
-//    password: "grape" 
-//};
-
-
 function check() { 
     var userName = document.getElementById('username').value;
     var pass = document.getElementById('password').value;
@@ -16,11 +9,6 @@ function check() {
         console.log("false");
       }
     }
-    
-//     if (true) {
-//      window.open("https://www.google.se/") /*opens the target page while Id & password matches*/
-//
-//     }
-       
+
     
     
