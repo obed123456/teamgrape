@@ -7,20 +7,8 @@ body{
   align-items: center;
   height: 100vh;
 }
-<<<<<<< HEAD
 .vh-height {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-=======
-
-v-height {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-
->>>>>>> ea37b578273a89ec6e8b41c0d5b29146027ad063
