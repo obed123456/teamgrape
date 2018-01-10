@@ -12,3 +12,13 @@
   justify-content: center;
   align-items: center;
 }
+
+.startPageTop {
+  background-color: #F5B041;
+  height: 40vh;
+}
+
+.startPageBottom {
+  background-color:;
+  height: 60vh;
+}
