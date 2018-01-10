@@ -24,26 +24,18 @@
           <h4>Login Here</h4>
             <div class="col-lg-12 col-md-12 col-xs-12">
 
-              <div class="form-group text-center" id="loginForm">
-                <h4>UserName</h4>
-                <input type="text" id="username" class="form-control col-lg-4 mx-auto" placeholder="type your username here">
-                <h4>Password</h4>
-                <input type="text" id="password" class="form-control col-lg-4 mx-auto" placeholder="type your password here">
-                  <button type="butotn" id="loginbtn" class="btn btn-default" onclick="check()">Login</button>
-              </div>
-            <a href="#" role="button" data-toggle="modal" data-target="#exampleModalLong">Rules about games</a>
 
               <div class="vh-height">
               <form>
                 <div class="col-lg-12 form-group">
-                    <input type="text" class="form-control" placeholder="Username">
+                    <input type="text" class="form-control" id="username" placeholder="Username">
                 </div>
                 <div class="col-lg-12 col-sm-12 col-xs-12 form-group">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>   
                 </form>
                 </div>                 
-                <button type="submit" class="btn btn-success ">Let's play!</button>
+                <button type="submit" class="btn btn-success" onclick="check()">Let's play!</button>
                 </div>
           </div>
         </div>
