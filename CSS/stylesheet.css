@@ -1,15 +1,14 @@
+.bg-color{
+  background-color: #F5B041  ;
+}
 .v-height {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-
-v-height {
+.vh-height {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
-
-
