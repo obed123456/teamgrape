@@ -74,9 +74,20 @@ h2,h3{
 }
 
 .nav-tabs .nav-link {
-  border: 1px solid #dee2e6;
+  border: 1px solid transparent;
 }
 
 .nav-link:hover {
   color: #fff;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+.nav-tabs {
+    border-bottom: 1px solid transparent;
 }
