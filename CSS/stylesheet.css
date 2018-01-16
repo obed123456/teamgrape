@@ -80,3 +80,11 @@ h2,h3{
 .nav-link:hover {
   color: #fff;
 }
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
