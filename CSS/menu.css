@@ -157,3 +157,8 @@ a
 {
   transform: none;
 }
+/* Vanlig mus pekare om man råkar röra vid "players taben"*/
+span {
+	cursor:default;
+	
+}
