@@ -14,7 +14,7 @@
         background-color: #8094E5;
     }
 </style>
-<body>
+<body style="overflow:hidden">
     <!-- navbar at the top left -->
     <nav role="navigation">
             <div id="menuToggle">
@@ -30,19 +30,21 @@
                 <ul id="menu">
                     <a href="#"><li>Leaderboard</li></a>
                     <a href="#"><li>Join a Team</li></a>
-                    <a href="#"><li>Create a Team</li></a>
                     <a href="#"><li>Settings</li></a>
                     <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout"><li>Help</li></a>
                     <a href="index.html"><li>Logout</li></a>
                 </ul>
         </div>
     </nav>
+                        <button type="button" class="hej btn btn-danger mx-auto d-block float-right pull-right">Quit game</button>
+						
 
 <section class="d-flex align-items-center" style="height: 100vh;">
+
     <div class="container-fluid" >
         <div class="col-sm-4 col-xs-12 mx-auto d-block">
-            <p class="text-center">Share this code to join the team</p>
-            <h3 id="myInput" class="bg-primary text-center rounded" onClick="myFunction()">1552142205</h3>
+            <p class="text-center text-white">Share this code to join the team</p>
+            <h3 id="myInput" class="border text-center rounded" onClick="myFunction()">1552142205</h3>
         </div>
 
         <ul class="nav nav-tabs" role="tablist">
@@ -52,11 +54,14 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#request" role="tab">Requests</a>
             </li>
+            <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#request" role="tab">Invite a team</a>
+            </li>
         </ul>
         <div class="tab-content">
                 <div class="tab-pane fade show active" id="players" role="tabpanel">
-                    <div class="">
-                            <ul  id ="yourteam" class="list-group">
+                    <div>
+                            <ul id ="yourteam" class="list-group" style="min-height: 40vh; overflow: scroll; overflow-x: hidden;">
                                 <li class="list-group-item"><i class="fa fa-user"></i> Player 1</li>
                                 <li class="list-group-item"><i class="fa fa-user"></i> Player 2</li>
                                 <li class="list-group-item"><i class="fa fa-user"></i> Player 3</li>
@@ -64,13 +69,52 @@
                                 <li class="list-group-item"><i class="fa fa-user"></i> Player 5</li>
                             </ul>
                         </div><br>
-                        <button type="button" class="btn btn-primary mx-auto d-block">Search Opponent</button>
-                    </div>
-                    <div class="tab-pane fade" id="request" role="tabpanel"><h1>Teams </h1></div>
+                        <button type="button" class="btn btn-success1 mx-auto d-block">Search Opponent</button>
                 </div>
-                
-    </div>
-    
+                <div class="tab-pane fade" id="request" role="tabpanel">
+                        <div>
+                                <ul id ="yourteam" class="list-group" style="min-height: 40vh; overflow: scroll; overflow-x: hidden;">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                                        <span class="badge badge-primary badge-pill">4</span>
+                                        <div>
+                                            <i class="fas fa-lg fa-check mr-2"></i>
+                                            <i class="fas  fa-lg fa-times"></i>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                                            <span class="badge badge-primary badge-pill">3</span>
+                                            <div>
+                                                <i class="fas fa-lg fa-check mr-2"></i>
+                                                <i class="fas  fa-lg fa-times"></i>
+                                            </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                            <div>
+                                                <i class="fas fa-lg fa-check mr-2"></i>
+                                                <i class="fas  fa-lg fa-times"></i>
+                                            </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                                            <span class="badge badge-primary badge-pill">4</span>
+                                            <div>
+                                                <i class="fas fa-lg fa-check mr-2"></i>
+                                                <i class="fas  fa-lg fa-times"></i>
+                                            </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                                            <span class="badge badge-primary badge-pill">4</span>
+                                            <div>
+                                                <i class="fas fa-lg fa-check mr-2"></i>
+                                                <i class="fas  fa-lg fa-times"></i>
+                                            </div>
+                                    </li>
+                                </ul>
+                            </div><br>
+                            <button type="button" class="btn btn-primary mx-auto d-block">Search Opponent</button>
+                    </div>
+        </div>                
+    </div>    
 </section>
 
 <script src="JS/script.js"></script>    
