@@ -6,10 +6,45 @@
     <title>JoinedPlayers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    </head>
+    <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="CSS/menu.css" />
+</head>
+<style>
+    body{
+        background-color: #8094E5;
+    }
+</style>
 <body>
-<section>
-    <div class="container-fluid">
+    <!-- navbar at the top left -->
+    <nav role="navigation">
+            <div id="menuToggle">
+                <!--
+                A fake / hidden checkbox is used as click reciever,
+                so you can use the :checked selector on it.
+                -->
+                <input type="checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                
+                <ul id="menu">
+                    <a href="#"><li>Leaderboard</li></a>
+                    <a href="#"><li>Join a Team</li></a>
+                    <a href="#"><li>Create a Team</li></a>
+                    <a href="#"><li>Settings</li></a>
+                    <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout"><li>Help</li></a>
+                    <a href="index.html"><li>Logout</li></a>
+                </ul>
+        </div>
+    </nav>
+
+<section class="d-flex align-items-center" style="height: 100vh;">
+    <div class="container-fluid" >
+        <div class="col-sm-4 col-xs-12 mx-auto d-block">
+            <p class="text-center">Share this code to join the team</p>
+            <h3 id="myInput" class="bg-primary text-center rounded" onClick="myFunction()">1552142205</h3>
+        </div>
+
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#players" role="tab">Joined players</a>
@@ -38,16 +73,19 @@
     
 </section>
 
+<script src="JS/script.js"></script>    
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <script>
-        $('#myTab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("Copy");
+  alert("Copied the text: " + copyText.value);
+}
     </script>
 </body>
 </html>

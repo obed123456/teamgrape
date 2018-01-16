@@ -9,7 +9,7 @@ a
 
 a:hover
 {
-  color: tomato;
+  color: #1CB5E0;
 }
 
 #menuToggle
@@ -87,7 +87,20 @@ a:hover
   transform: rotate(45deg) translate(-2px, -1px);
   background: #232323;
 }
-
+#menuToggle input:checked:hover~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #1CB5E0;
+}
+@media screen and (max-width: 480px) {
+#menuToggle input:checked:hover~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: black;
+}
+}
 /*
  * But let's hide the middle one.
  */
