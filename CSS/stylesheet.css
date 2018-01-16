@@ -28,13 +28,13 @@ background: -webkit-linear-gradient(to left, #000046, #1CB5E0 );  /* Chrome 10-2
 background: linear-gradient(to left,#000046, #1CB5E0 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
-.btn-success:hover {
+.btn-success1:hover {
     color: white;
     background-color: #1CB5E0;
     border-color: transparent;
 }
 
-.btn-success {
+.btn-success1{
     color: white;
     background-color: transparent;
     border:2px solid white;
@@ -56,4 +56,19 @@ background: linear-gradient(to left,#000046, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fi
 h2,h3{
 	color:white;
 
+}
+.pull-right {
+	position:absolute;
+	right:10px;
+	top:35px;
+	
+	
+}
+
+@media screen and (max-width: 480px) {
+.pull-right {
+	position:absolute;
+	right:10px;
+	top:15px;	
+}
 }
