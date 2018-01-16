@@ -1,6 +1,15 @@
+body {
+background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #000046, #1CB5E0 );  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left,#000046, #1CB5E0 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
 .bg-color{
   background-color: #F5B041  ;
 }
+
 .v-height {
   display: flex;
   justify-content: center;
@@ -14,13 +23,71 @@
 }
 
 .startPageTop {
-  background-color: #F5B041;
-  height: 40vh;
+background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #000046, #1CB5E0 );  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left,#000046, #1CB5E0 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.btn-success1:hover {
+    color: white;
+    background-color: #1CB5E0;
+    border-color: transparent;
+}
+
+.btn-success1{
+    color: white;
+    background-color: transparent;
+    border:2px solid white;
 }
 
 .startPageBottom {
   background-image: url("../IMG/map.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 60vh;
+  height: 62vh;
+}
+
+/*För att dölja create button när man klickar på menyn*/
+.input-group-append .btn, .input-group-prepend .btn {
+  position: relative;
+  z-index: 0;
+}
+
+h2,h3{
+	color:white;
+
+}
+.pull-right {
+	position:absolute;
+	right:10px;
+	top:35px;
+	
+	
+}
+
+@media screen and (max-width: 480px) {
+.pull-right {
+	position:absolute;
+	right:10px;
+	top:15px;	
+}
+}
+
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+.nav-tabs {
+    border-bottom: 1px solid transparent;
 }
