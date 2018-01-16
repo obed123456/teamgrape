@@ -72,3 +72,11 @@ h2,h3{
 	top:15px;	
 }
 }
+
+.nav-tabs .nav-link {
+  
+}
+
+.nav-link:hover {
+  color: #fff;
+}
