@@ -79,7 +79,7 @@ h2,h3{
 .pull-right {
 	position:absolute;
 	right:10px;
-	top:15px;	
+	top:15px;
 }
 }
 
@@ -119,16 +119,15 @@ color:white
 	margin-bottom:49px;
 }
 }
-/* Vinster och förluster icon center*/	
-#score svg:not(:root).svg-inline--fa {
+/* Vinster och förluster icon center*/
+.score svg:not(:root).svg-inline--fa {
     overflow: visible;
     position: absolute;
     left: 49%;
-	top:50%;
+    top: 35%;
 }
 /* Profil leaderboard icon */
 .player svg:not(:root).svg-inline--fa {
     overflow: visible;
 	-webkit-filter: invert(100%);
 }
-
