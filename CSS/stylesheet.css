@@ -47,7 +47,7 @@ background: linear-gradient(to top,#0f59ff, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fir
     border:2px solid white;
 }
 
-#yourteam button {
+.invite-team button {
    margin: -15px;
    margin-right: 0px;
 }
