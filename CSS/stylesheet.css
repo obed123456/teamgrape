@@ -114,3 +114,27 @@ color:white
 .list-group-item  {
    cursor:default
 }
+.mp {
+	position:relative;
+	margin-bottom:103px;
+}
+
+@media screen and (max-width: 480px) {
+.mp {
+	position:relative;
+	margin-bottom:49px;
+}
+}
+/* Vinster och förluster icon center*/	
+#score svg:not(:root).svg-inline--fa {
+    overflow: visible;
+    position: absolute;
+    left: 49%;
+	top:50%;
+}
+/* Profil leaderboard icon */
+.player svg:not(:root).svg-inline--fa {
+    overflow: visible;
+	-webkit-filter: invert(100%);
+}
+
