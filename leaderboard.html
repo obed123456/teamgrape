@@ -1,151 +1,148 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
-        crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="CSS/menu.css" />
-    <title>Leaderboard</title>
-  </head>
-  <body>
-    <!-- navbar at the top left -->
-    <nav role="navigation">
-        <div id="menuToggle">
-            <!--
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="CSS/menu.css" />
+  <title>Leaderboard</title>
+</head>
+
+<body>
+  <!-- navbar at the top left -->
+  <nav role="navigation">
+    <div id="menuToggle">
+      <!--
                 A fake / hidden checkbox is used as click reciever,
                 so you can use the :checked selector on it.
                 -->
-            <input type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
 
-            <ul id="menu">
-                <a href="#">
-                    <li>Leaderboard</li>
-                </a>
-                <a href="#">
-                    <li>Join a Team</li>
-                </a>
-                <a href="#">
-                    <li>Settings</li>
-                </a>
-                <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout">
-                    <li>Help</li>
-                </a>
-                <a href="index.html">
-                    <li>Logout</li>
-                </a>
-            </ul>
-        </div>
-    </nav>
-    <button type="button" class="btn btn-danger mx-auto d-block float-right pull-right"><a href="startpage.html">Quit Game</a></button>
+      <ul id="menu">
+        <a href="#">
+          <li>Leaderboard</li>
+        </a>
+        <a href="#">
+          <li>Join a Team</li>
+        </a>
+        <a href="#">
+          <li>Settings</li>
+        </a>
+        <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout">
+          <li>Help</li>
+        </a>
+        <a href="index.html">
+          <li>Logout</li>
+        </a>
+      </ul>
+    </div>
+  </nav>
+  <button type="button" class="btn btn-danger mx-auto d-block float-right pull-right"><a href="startpage.html">Quit Game</a></button>
 
 
-    <section class="d-flex align-items-center" style="height: 100vh;">
+  <section class="d-flex align-items-center" style="height: 100vh;">
 
-      <div class="container-fluid">
-        <span class="fa fa-2x fa-user"></span>
-        <h4>Player 1</h4>
-        <hr>
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item"><a class="nav-link active" href="#score" data-toggle="tab">Score</a></li>
-          <li class="nav-item"><a class="nav-link" href="#rank" data-toggle="tab">Rank</a></li>
-        </ul>
-        <br>
+    <div class="container-fluid">
+      <span class="fa fa-2x fa-user"></span>
+      <h4>Player 1</h4>
+      <hr>
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item"><a class="nav-link active" href="#score" data-toggle="tab">Score</a></li>
+        <li class="nav-item"><a class="nav-link" href="#rank" data-toggle="tab">Rank</a></li>
+      </ul>
+      <br>
 
-        <!-- <div class="btn-group col-xs-12 col-sm-12 justify-content-center" role="group" aria-label="ranks" style="border: 1px solid red;">
+      <!-- <div class="btn-group col-xs-12 col-sm-12 justify-content-center" role="group" aria-label="ranks" style="border: 1px solid red;">
           <button type="button" name="Score" id="score" class="btn btn-secondary">Score</button>
           <button type="button" name="Ranks" id="rank" class="btn btn-secondary">Ranks</button>
         </div> -->
-          <div class="tab-content">
-              <div class="tab-pane fade show active" id="score" role="tabpanel">
-                  <div>
-                      <ul id="score" class="score list-group" style="min-height: 40vh; overflow-y: hidden; overflow-x: hidden;">
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
-                            <i class="fas fa-trophy"></i>
-                            <span class="badge badge-primary badge-pill">Time: 12:34</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Team Lemon
-                            <i class="fas fa-minus-circle"></i>
-                            <span class="badge badge-primary badge-pill">Time: 12:34</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Team Pinapple
-                            <i class="fas fa-minus-circle"></i>
-                            <span class="badge badge-primary badge-pill">Time: 12:34</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
-                            <i class="fas fa-trophy"></i>
-                            <span class="badge badge-primary badge-pill">Time: 12:34</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Team Apple
-                            <i class="fas fa-minus-circle"></i>
-                            <span class="badge badge-primary badge-pill">Time: 12:34</span>
-                          </li>
-                      </ul>
-                  </div>
-                  <br>
-              </div>
-              <div class="tab-pane fade" id="rank" role="tabpanel">
-                  <div>
-                      <ul id="rank" class="list-group" style="min-height: 40vh; overflow-y:hidden; overflow-x: hidden;">
-                          <li class="list-group-item d-flex justify-content-between align-items-center">1
-                              <div class="">
-
-                              </div> <span class="badge badge-primary badge-pill">5</span>
-                              <div>
-                                  <i class="fas fa-lg fa-check mr-2 green"></i>
-                                  <i class="fas  fa-lg fa-times red"></i>
-                              </div>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Player 2
-                              <span class="badge badge-primary badge-pill">4 wins</span>
-                              <div>
-                                  <i class="fas fa-lg fa-check mr-2 green"></i>
-                                  <i class="fas  fa-lg fa-times red"></i>
-                              </div>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Player 3
-                              <span class="badge badge-primary badge-pill">3 wins</span>
-                              <div>
-                                  <i class="fas fa-lg fa-check mr-2 green"></i>
-                                  <i class="fas  fa-lg fa-times red"></i>
-                              </div>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Player 4
-                              <span class="badge badge-primary badge-pill">2 wins</span>
-                              <div>
-                                  <i class="fas fa-lg fa-check mr-2 green"></i>
-                                  <i class="fas  fa-lg fa-times red"></i>
-                              </div>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">Player 5
-                              <span class="badge badge-primary badge-pill">1 win</span>
-                              <div>
-                                  <i class="fas fa-lg fa-check mr-2 green" Alt="Accept"></i>
-                                  <i class="fas  fa-lg fa-times red" Alt="Red"></i>
-                              </div>
-                          </li>
-                      </ul>
-                  </div>
-                  <br>
-              </div>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="score" role="tabpanel">
+          <div>
+            <ul id="score" class="score list-group" style="min-height: 40vh; overflow-y: hidden; overflow-x: hidden;">
+              <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
+                <i class="fas fa-trophy"></i>
+                <span class="badge badge-primary badge-pill">Time: 12:34</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Team Lemon
+                <i class="fas fa-minus-circle"></i>
+                <span class="badge badge-primary badge-pill">Time: 12:34</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Team Pinapple
+                <i class="fas fa-minus-circle"></i>
+                <span class="badge badge-primary badge-pill">Time: 12:34</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
+                <i class="fas fa-trophy"></i>
+                <span class="badge badge-primary badge-pill">Time: 12:34</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Team Apple
+                <i class="fas fa-minus-circle"></i>
+                <span class="badge badge-primary badge-pill">Time: 12:34</span>
+              </li>
+            </ul>
           </div>
+          <br>
+        </div>
+        <div class="tab-pane fade" id="rank" role="tabpanel">
+          <div>
+            <ul id="rank" class="list-group" style="min-height: 40vh; overflow-y:hidden; overflow-x: hidden;">
+              <li class="list-group-item d-flex justify-content-between align-items-center">#1
+                <div>Zlatan</div>
+                <div>
+                  <span class="badge badge-primary badge-pill">5</span>
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">#2
+                <div>Obed</div>
+                <div>
+                  <span class="badge badge-primary badge-pill">4</span>
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">#3
+                <div>David</div>
+                <div>
+                  <span class="badge badge-primary badge-pill">3</span>
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">#4
+                <div>Jesse</div>
+                <div>
+                  <span class="badge badge-primary badge-pill">2</span>
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">#5
+                <div>Patrik</div>
+                <div>
+                  <span class="badge badge-primary badge-pill">1</span>
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <br>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
-        crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+</body>
+
 </html>
