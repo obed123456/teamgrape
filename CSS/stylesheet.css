@@ -108,3 +108,14 @@ color:white
 .list-group-item  {
    cursor:default
 }
+.mp {
+	position:relative;
+	margin-bottom:103px;
+}
+
+@media screen and (max-width: 480px) {
+.mp {
+	position:relative;
+	margin-bottom:49px;
+}
+}
