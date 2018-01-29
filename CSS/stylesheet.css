@@ -47,6 +47,12 @@ background: linear-gradient(to top,#0f59ff, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fir
     border:2px solid white;
 }
 
+.invite-team button {
+   margin: -15px;
+   margin-right: 0px;
+}
+
+
 .startPageBottom {
   background-image: url("../IMG/map.jpg");
   background-repeat: no-repeat;
@@ -129,5 +135,32 @@ color:white
 /* Profil leaderboard icon */
 .player svg:not(:root).svg-inline--fa {
     overflow: visible;
-	-webkit-filter: invert(100%);
+    color: #fff;
+    width: 100px;
+    height: 100px;
+}
+
+.scoreToggle{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: #000;
+  background-color: #ccc;
+}
+
+.rankToggle {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #ccc;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #fff;
+  color: #000;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid #fff;
 }

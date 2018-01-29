@@ -31,11 +31,13 @@ body {
         <span></span>
 
         <ul id="menu">
+		 <a href="startpage.html"><li>Home</li></a>
+		 
             <a href="leaderboard.html">
                 <li>Leaderboard</li>
             </a>
             <a href="#">
-                <li>Join a Team</li>
+                <li class="activemenu">Join a Team</li>
             </a>
             <a href="#">
                 <li>Settings</li>
@@ -61,7 +63,7 @@ body {
       </div>
       <br>
 
-      <ul class="nav nav-tabs" role="tablist">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
           <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#players" role="tab">Joined players</a>
           </li>
@@ -69,7 +71,7 @@ body {
               <a class="nav-link" data-toggle="tab" href="#request" role="tab">Requests</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#request" role="tab">Invite a team</a>
+              <a class="nav-link" data-toggle="tab" href="#invite" role="tab">Invite a team</a>
           </li>
       </ul>
       <div class="tab-content">
@@ -132,6 +134,43 @@ body {
               </div>
               <br>
           </div>
+          <div class="tab-pane fade" id="invite" role="tabpanel">
+                <div>
+                    <ul id="yourteam" class="invite-team list-group" style="min-height: 40vh; overflow-y:hidden; overflow-x: hidden;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Team 1
+                            <span class="badge badge-primary badge-pill">4 Players</span>
+                            <div>
+                                <button type="button" class="btn btn-success btn-sm">Invite</button>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Team 2
+                            <span class="badge badge-primary badge-pill">3 Players</span>
+                            <div>
+                                 <button type="button" class="btn btn-success btn-sm">Invite</button>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Team 3
+                            <span class="badge badge-primary badge-pill">2 Players</span>
+                            <div>
+                                 <button type="button" class="btn btn-success btn-sm">Invite</button>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Team 4
+                            <span class="badge badge-primary badge-pill">4 Players</span>
+                            <div>
+                                  <button type="button" class="btn btn-success btn-sm">Invite</button>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Team 5
+                            <span class="badge badge-primary badge-pill">4 Players</span>
+                            <div>
+                                  <button type="button" class="btn btn-success btn-sm">Invite</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+            </div>
       </div>
   </div>
 </section>
