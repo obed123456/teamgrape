@@ -6,7 +6,8 @@ function check() {
          window.open("joinplayer.html", "_self");
       } else {
         console.log("false");
-        alert("false");
+        document.getElementById('codeInput').value = "";
+        document.getElementById('codeInput').placeholder ="Try again!";
       }
     }
     document.getElementById("codeGenerator").addEventListener("click", check);
