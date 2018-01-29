@@ -3,7 +3,7 @@ document.getElementById("myBtn").addEventListener("click", function(){
   event.preventDefault()
 
  if (teamName.value !== ''){
-  window.open("joinplayer.html")
+  window.open("joinplayer.html","_self"); 
  } else {
   document.getElementById("emptyField").innerHTML ='<span style="color: #fff">You must enter a teamname!</span>';
  }
