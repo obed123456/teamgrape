@@ -97,10 +97,7 @@
               <label for="password">Password:</label>
               <input type="password" class="form-control" name="pwd" placeholder="Enter Password" id="password" required>
             </div>
-            <div class="form-group">
-              <label for="cPassword">Confirm Password:</label>
-              <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required>
-            </div>
+            
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="termsAndCondition" required>
               <label class="form-check-label" for="termsAndCondition">I agree to the following <a href="#" role="button" data-toggle="modal" data-target="#exampleModalLong">terms and conditions</a></label>
