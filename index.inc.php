@@ -27,13 +27,13 @@ if (isset($_POST['submit'])) {
       exit();
     } else {
       // Check if email is vaild
-      if(filter_var($_GET[$email],FILTER_VALIDATE_EMAIL)) {
+      if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
         header("Location: index.php?signup=email");
         exit();
       } else {
         $sql = "SELECT * FROM user WHERE user_uid='$uid'";
         $result = mysqli_query($conn, $sql);
-        $resultCheck = mydsqli_num_rows($result);
+        $resultCheck = mysqli_num_rows($result);
 
         if($resultCheck > 0) {
           header("Location: index.php?signup=usertaken");
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
           // Hashing the password
           $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
           //Insert the user into the database
-          $sql = "INSERT INTO user (user_name, user_email, user_pwd) VALUES ($uid, $email, $hashedPwd);";
+          $sql = "INSERT INTO users (user_name, user_email, user_pwd) VALUES ('$uid', '$email', '$hashedPwd');";
         mysqli_query($conn, $sql);
         header("Location: index.php?signup=success");
         exit();
