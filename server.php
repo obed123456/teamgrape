@@ -8,7 +8,7 @@
 	$_SESSION['success'] = "";
 
 	// connect to database
-	$db = mysqli_connect('localhost', 'root', '', 'registration');
+$db = mysqli_connect('sql203.epizy.com', 'epiz_21477544', 'password', 'epiz_21477544_registration');
 
 	// REGISTER USER
 	if (isset($_POST['reg_user'])) {
@@ -36,7 +36,7 @@
 
 			$_SESSION['username'] = $username;
 			$_SESSION['success'] = "You are now logged in";
-			header('location: index.php');
+			header('location: startpage.php');
 		}
 
 	}
@@ -62,8 +62,8 @@
 
 			if (mysqli_num_rows($results) == 1) {
 				$_SESSION['username'] = $username;
-				$_SESSION['success'] = "You are now logged in";
-				header('location: index.php');
+				$_SESSION['success'] = "You are now logged in...";
+				header('location: startpage.php');
 			}else {
 				array_push($errors, "Wrong username/password combination");
 			}
