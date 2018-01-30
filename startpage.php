@@ -124,7 +124,7 @@
       </div>
     <div class="container-fluid startPageBottom">
 
-    </div>
+</div> <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqwpwKirHNR8hapcq0pCHGPq94qjDKBhU&callback=initMap"></script>
 <script src="JS/codeGenerator.js"></script>
 <script src="JS/script.js"></script> 
 <script src="JS/createTeam.js"></script> 

@@ -53,8 +53,7 @@ background: linear-gradient(to top,#0f59ff, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fir
 
 
 #startPageBottom {
-  height: 62vh;
-  width: 100%;
+  
 }
 
 /*För att dölja create button när man klickar på menyn*/
