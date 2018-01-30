@@ -8,7 +8,7 @@
 	$_SESSION['success'] = "";
 
 	// connect to database
-$db = mysqli_connect('sql203.epizy.com', 'epiz_21477544', 'password', 'epiz_21477544_registration');
+$db = mysqli_connect('localhost', '', '', '');
 
 	// REGISTER USER
 	if (isset($_POST['reg_user'])) {
