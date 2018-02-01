@@ -63,31 +63,59 @@
       <div id="map"></div>
     </div>
     <script>
-      var map;
+
+      var map, infoWindow;
 
       // Create a new blank array for all the listing markers.
-      var markers = [];
+      var markers = [];      
+      //users Current location
+      var userPosition = [];
+      //All markers from the list only cordinates lat lng
+      var allMarkers = [];
 
+      
       function initMap() {
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 59.313335, lng: 18.107858},
-          zoom: 13,
+          zoom: 18,
           mapTypeControl: false
         });
 
         // These are the real estate listings that will be shown to the user.
         // Normally we'd have these in a database instead.
         var locations = [
-          {title: 'Henriksdals reningsverk', location: {lat: 59.310978, lng: 18.108015}},
-          {title: 'Elite Hotel Marina Tower', location: {lat: 59.314782, lng: 18.109341}},
-          {title: 'Boule & Berså', location: {lat: 59.313904, lng: 18.106184}},
-          {title: 'Pizzerian på andra sidan bron', location: {lat: 59.312446, lng: 18.106584}},
-          {title: 'Gula huset, Manngrynskvarnen', location: {lat: 59.314298, lng: 18.110620}},
-          {title: 'Henriksdals Station, mot Slussen', location: {lat: 59.312310, lng: 18.107932}}
+          {title: 'Skolan 607', location: {lat: 59.3134, lng:18.1108}},
+          {title: 'Elite Hotel Marina Tower', location: {lat: 59.3147, lng: 18.1093}},
+          {title: 'Boule & Berså', location: {lat: 59.3139, lng: 18.1061}},
+          {title: 'Pizzerian på andra sidan bron', location: {lat: 59.3124, lng: 18.1065}},
+          {title: 'Gula huset, Manngrynskvarnen', location: {lat: 59.3142, lng: 18.1106}},
+          {title: 'Henriksdals Station, mot Slussen', location: {lat: 59.3123, lng: 18.1079}}
         ];
 
-        var largeInfowindow = new google.maps.InfoWindow();
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+
+
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
 
         // The following group uses the location array to create an array of markers on initialize.
         for (var i = 0; i < locations.length; i++) {
@@ -106,9 +134,56 @@
           markers.push(marker);
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
+            populateInfoWindow(this, infoWindow);
           });
         }
+
+
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+
+
+          // code belo will match the usersposition with checkpoint in one array
+          userPosition.push(pos);
+          console.log(userPosition);
+          // +() changes string into number
+          for (var i = 0; i < userPosition.length; i++){
+            userPosition[i].lat = +(userPosition[i].lat.toFixed(6)); 
+            userPosition[i].lng = +(userPosition[i].lng.toFixed(6)); 
+
+          }        
+          
+          //console.log(allMarkers);
+          if((userPosition[0].lng && userPosition[0].lat) === (allMarkers[0].lng && allMarkers[0].lat))   {
+            alert('You have reached the checkpoint');
+          } else {
+            alert('Your position doesnt match');
+          }
+
+          for(var i=0; i < allMarkers.length; i++) {
+          var x = allMarkers[i].lat.toFixed(2);
+          console.log(x);
+        }
+        // below code with show current location of user
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+
+
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
       }
@@ -147,42 +222,8 @@
         }
       }
 
-var userPosition = [];
-var allMarkers = [];
 
-
-
-
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          userPosition.push(pos);
-          console.log(userPosition);
-          console.log(allMarkers);
-          if(userPosition[0] === allMarkers[0])  {
-            alert('You have reached the checkpoint');
-          }
-          for(var i=0; i < allMarkers.length; i++) {
-          var x = allMarkers[i].lat.toFixed(2);
-          console.log(x);
-        }
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
-          map.setCenter(pos);
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-
-
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
+    
 
     </script>
 
