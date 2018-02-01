@@ -71,7 +71,7 @@
       function initMap() {
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 40.7413549, lng: -73.9980244},
+          center: {lat: 59.313335, lng: 18.107858},
           zoom: 13,
           mapTypeControl: false
         });
@@ -79,12 +79,12 @@
         // These are the real estate listings that will be shown to the user.
         // Normally we'd have these in a database instead.
         var locations = [
-          {title: 'Park Ave Penthouse', location: {lat: 59.2436339, lng: 17.8061813}},
-          {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-          {title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-          {title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-          {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-          {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
+          {title: 'Henriksdals reningsverk', location: {lat: 59.310978, lng: 18.108015}},
+          {title: 'Elite Hotel Marina Tower', location: {lat: 59.314782, lng: 18.109341}},
+          {title: 'Boule & Berså', location: {lat: 59.313904, lng: 18.106184}},
+          {title: 'Pizzerian på andra sidan bron', location: {lat: 59.312446, lng: 18.106584}},
+          {title: 'Gula huset, Manngrynskvarnen', location: {lat: 59.314298, lng: 18.110620}},
+          {title: 'Henriksdals Station, mot Slussen', location: {lat: 59.312310, lng: 18.107932}}
         ];
 
         var largeInfowindow = new google.maps.InfoWindow();
@@ -147,8 +147,8 @@
         }
       }
 
-var userPosition = [12.12345]; 
-var allMarkers = [12.12345];
+var userPosition = [];
+var allMarkers = [];
 
 
 
@@ -183,7 +183,7 @@ var allMarkers = [12.12345];
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
       }
-    
+
     </script>
 
     <script async defer
