@@ -81,41 +81,30 @@
               <h3>The Amazing Game</h3>
               <h4>Registration</h4>
               <p>Please enter your registration details below</p>
-              <form>
             </div>
           </div>
+          <form action="index.inc.php" method="POST">
           <div class="col-sm-12 col-xs-12">
             <div class="form-group">
-              <label for="fName">First Name:</label>
-              <input type="text" class="form-control" placeholder="Enter First Name" id="fName" required>
-            </div>
-            <div class="form-group">
-              <label for="lname">Last Name:</label>
-              <input type="text" class="form-control" placeholder="Enter Last Name" id="lName" required>
-            </div>
-            <div class="form-group">
               <label for="uName">Username:</label>
-              <input type="text" class="form-control" placeholder="Enter Username" id="uName" required>
+              <input type="text" class="form-control" name="uid" placeholder="Enter Username" id="uName" required>
             </div>
             <div class="form-group">
               <label for="email">Email:</label>
-              <input type="email" class="form-control" placeholder="Enter Email" id="email" required>
+              <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" required>
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
-              <input type="password" class="form-control" placeholder="Enter Password" id="password" required>
+              <input type="password" class="form-control" name="pwd" placeholder="Enter Password" id="password" required>
             </div>
-            <div class="form-group">
-              <label for="cPassword">Confirm Password:</label>
-              <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required>
-            </div>
+            
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="termsAndCondition" required>
               <label class="form-check-label" for="termsAndCondition">I agree to the following <a href="#" role="button" data-toggle="modal" data-target="#exampleModalLong">terms and conditions</a></label>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
+            <button type="submit" name="submit" class="btn btn-default">Submit</button>
         </div>
+        </form>
         </div>
       </div>
       <div class="modal-footer">
