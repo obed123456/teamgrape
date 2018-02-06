@@ -64,7 +64,7 @@
     </div>
     <script>
 
-      var map, infoWindow;
+      var map, infoWindow, n;
 
       // Create a new blank array for all the listing markers.
       var markers = [];
@@ -72,6 +72,23 @@
       var userPosition = [];
       //All markers from the list only cordinates lat lng
       var allMarkers = [];
+
+      // circle around marker
+
+      function arePointsNear(checkPoint, centerPoint, km) {
+          var ky = 40000 / 360;
+          var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
+          var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
+          var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
+          return Math.sqrt(dx * dx + dy * dy) <= km;
+      }
+
+      var finnboda2 = { lat: 59.313249, lng: 18.110743 };
+      var finnboda4 = { lat: 59.313453, lng: 18.110635 };
+
+      // var n = arePointsNear(finnboda2, finnboda4, 0.023);
+
+      // console.log(n);
 
 
       function initMap() {
@@ -158,17 +175,31 @@
 
           }
 
-          //console.log(allMarkers);
-          if((userPosition[0].lng && userPosition[0].lat) === (allMarkers[0].lng && allMarkers[0].lat))   {
-            alert('You have reached the checkpoint');
-          } else {
-            alert('Your position doesnt match');
+          console.log(allMarkers);
+          for (var i = 0; i < allMarkers.length; i++) {
+            n = arePointsNear(pos, allMarkers[i], 0.02);
+            if(n)   {
+              alert('You have reached the checkpoint');
+              break;
+            } else {
+              alert('Your position doesnt match');
+              break;
+            }
+
           }
+
+          // var n = arePointsNear(pos, allMarkers[0], 0.02);
+
+          // if(n)   {
+          //   alert('You have reached the checkpoint');
+          // } else {
+          //   alert('Your position doesnt match');
+          // }
 
           for(var i=0; i < allMarkers.length; i++) {
           var x = allMarkers[i].lat.toFixed(4);
           var y = allMarkers[i].lng.toFixed(4);
-          console.log(x, y);
+          // console.log(x, y);
         }
         // below code with show current location of user
           infoWindow.setPosition(pos);
