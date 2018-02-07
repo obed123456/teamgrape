@@ -68,28 +68,21 @@
 
       // Create a new blank array for all the listing markers.
       var markers = [];
+
       //users Current location
       var userPosition = [];
+
       //All markers from the list only cordinates lat lng
       var allMarkers = [];
 
       // circle around marker
-
       function arePointsNear(checkPoint, centerPoint, km) {
           var ky = 40000 / 360;
           var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
           var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
           var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
           return Math.sqrt(dx * dx + dy * dy) <= km;
-      }
-
-      var finnboda2 = { lat: 59.313249, lng: 18.110743 };
-      var finnboda4 = { lat: 59.313453, lng: 18.110635 };
-
-      // var n = arePointsNear(finnboda2, finnboda4, 0.023);
-
-      // console.log(n);
-
+      };
 
       function initMap() {
         // Constructor creates a new map - only center and zoom are required.
@@ -116,7 +109,7 @@
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
           };
 
           infoWindow.setPosition(pos);
@@ -155,7 +148,6 @@
           });
         }
 
-
         if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
@@ -163,78 +155,42 @@
             lng: position.coords.longitude
           };
 
-
-
           // code belo will match the usersposition with checkpoint in one array
           userPosition.push(pos);
-          console.log(userPosition);
-          // +() changes string into number
-          for (var i = 0; i < userPosition.length; i++){
-            userPosition[i].lat = +(userPosition[i].lat.toFixed(4));
-            userPosition[i].lng = +(userPosition[i].lng.toFixed(4));
 
-          }
-
-          console.log(allMarkers);
+          //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
           for (var i = 0; i < allMarkers.length; i++) {
             n = arePointsNear(pos, allMarkers[i], 0.02);
-            if(n)   {
+            if(n) {
               alert('You have reached the checkpoint');
               break;
             } else {
               alert('Your position doesnt match');
               break;
             }
-
           }
-
-          // var n = arePointsNear(pos, allMarkers[0], 0.02);
-
-          // if(n)   {
-          //   alert('You have reached the checkpoint');
-          // } else {
-          //   alert('Your position doesnt match');
-          // }
-
-          for(var i=0; i < allMarkers.length; i++) {
-          var x = allMarkers[i].lat.toFixed(4);
-          var y = allMarkers[i].lng.toFixed(4);
-          // console.log(x, y);
-        }
-        // below code with show current location of user
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
-          map.setCenter(pos);
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
         });
-
-
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
       }
+    }
+
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
-      function populateInfoWindow(marker, infowindow) {
-        // Check to make sure the infowindow is not already opened on this marker.
-        if (infowindow.marker != marker) {
-          infowindow.marker = marker;
-          infowindow.setContent('<div>' + marker.title + '</div>');
-          infowindow.open(map, marker);
-          // Make sure the marker property is cleared if the infowindow is closed.
-          infowindow.addListener('closeclick', function() {
-            infowindow.marker = null;
-          });
-        }
-      }
+      // function populateInfoWindow(marker, infowindow) {
+      //   // Check to make sure the infowindow is not already opened on this marker.
+      //   if (infowindow.marker != marker) {
+      //     infowindow.marker = marker;
+      //     infowindow.setContent('<div>' + marker.title + '</div>');
+      //     infowindow.open(map, marker);
+      //     // Make sure the marker property is cleared if the infowindow is closed.
+      //     infowindow.addListener('closeclick', function() {
+      //       infowindow.marker = null;
+      //     });
+      //   }
+      // }
 
       // This function will loop through the markers array and display them all.
       function showListings() {
@@ -252,11 +208,7 @@
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
-      }
-
-
-
-
+      };
     </script>
 
     <script async defer
