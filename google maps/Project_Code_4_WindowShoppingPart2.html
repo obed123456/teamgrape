@@ -1,176 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="css.css">
-    <style>
-      html,
-      body {
-        font-family: Arial, sans-serif;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
 
-      .container {
-        height: 100%;
-        position: relative;
-      }
+<head>
+  <style>
+    html,
+    body {
+      font-family: Arial, sans-serif;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-      input {
-        font-size: 12px;
-      }
+    .container {
+      height: 100%;
+      position: relative;
+    }
 
-      h1 {
-        color: #525454;
-        font-size: 22px;
-        margin: 0 0 10px 0;
-        text-align: center;
-      }
+    input {
+      font-size: 12px;
+    }
 
-      #hide-listings,
-      #show-listings {
-        width: 48%;
-      }
+    h1 {
+      color: #525454;
+      font-size: 22px;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
 
-      #map {
-        bottom:0px;
-        height: 100%;
-        left: 362px;
-        position: absolute;
-        right: 0px;
-      }
+    #hide-listings,
+    #show-listings {
+      width: 48%;
+    }
 
-      .options-box {
-        background: #fff;
-        border: 1px solid #999;
-        border-radius: 3px;
-        height: 100%;
-        line-height: 35px;
-        padding: 10px 10px 30px 10px;
-        text-align: left;
-        width: 340px;
-      }
-    </style>
-  </head>
-  <body>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <div class="container">
-      <div class="options-box">
-        <h1>Find Your New NYC Home</h1>
-        <div>
-          <input id="show-listings" type="button" value="Show Listings">
-          <input id="hide-listings" type="button" value="Hide Listings">
-        </div>
-      </div>
-      <div id="map"></div>
-    </div>
-	<!--Modal-->
-<div class="modal fade" id="#myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    #map {
+      bottom: 0px;
+      height: 100%;
+      left: 362px;
+      position: absolute;
+      right: 0px;
+    }
 
-        </button>
-        <h4 class="modal-title"><center>You reached the <b>first</b> Checkpoint</center></h4>
+    .options-box {
+      background: #fff;
+      border: 1px solid #999;
+      border-radius: 3px;
+      height: 100%;
+      line-height: 35px;
+      padding: 10px 10px 30px 10px;
+      text-align: left;
+      width: 340px;
+    }
+  </style>
+</head>
 
-      </div>
-      <div class="modal-body">
-   
-	    <div id="quiz">
-  <div id="q1">
-    <h4><span id="demo">1</span> <span id="demo"></span></h4>
-<button type="button" class="button1" value="Volvo">
-              <p>Volvo</p>
-            
-   </button>
-
-<button type="button" class="button1" value="Audi">
-               <p>Audi</p>
-             
-   </button>
-
-<button type="button" class="button1" value="Mercedes">
-               <p>Mercedes</p>
-             
-   </button>
-   <button type="button" class="button1" value="Fiat">
-               <p>Fiat</p>
-            
-   </button>
-  </div>  
-</div> 
-</div>
-      <div class="modal-footer">
-        <center><button type="button" data-dismiss="modal" class="btn btn-primary .text-center">Save answer</button></center>
-		<div id="center">
-  <div id="container">
-  <div id="demo">
-      <div class="n">10</div>
-    <div class="n">9</div>
-    <div class="n">8</div>
-    <div class="n">7</div>
-    <div class="n">6</div>
-    <div class="n">5</div>
-    <div class="n">4</div>
-    <div class="n">3</div>
-    <div class="n">2</div>
-    <div class="n">1</div>
-    <div class="n">0</div>
-  </div>
-</div>
+<body>
+  <div class="container">
+    <div class="options-box">
+      <h1>Find Your New NYC Home</h1>
+      <div>
+        <input id="show-listings" type="button" value="Show Listings">
+        <input id="hide-listings" type="button" value="Hide Listings">
       </div>
     </div>
-    <!-- /.modal-content -->
+    <div id="map"></div>
   </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!--End Modal-->
-    <script>
+  <script>
+    var map, infoWindow, n;
 
-      var map, infoWindow;
+    // Create a new blank array for all the listing markers.
+    var markers = [];
 
-      // Create a new blank array for all the listing markers.
-      var markers = [];
-      //users Current location
-      var userPosition = [];
-      //All markers from the list only cordinates lat lng
-      var allMarkers = [];
+    //users Current location
+    var userPosition = [];
 
+    //All markers from the list only cordinates lat lng
+    var allMarkers = [];
 
-      function initMap() {
-        // Constructor creates a new map - only center and zoom are required.
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 59.313335, lng: 18.107858},
-          zoom: 18,
-          mapTypeControl: false
-        });
+    // circle around marker
+    function arePointsNear(checkPoint, centerPoint, km) {
+      var ky = 40000 / 360;
+      var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
+      var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
+      var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
+      return Math.sqrt(dx * dx + dy * dy) <= km;
+    };
 
-        // These are the real estate listings that will be shown to the user.
-        // Normally we'd have these in a database instead.
-        var locations = [
-          {title: 'Skolan 607', location: {lat: 59.3134, lng:18.1108}},
-          {title: 'Elite Hotel Marina Tower', location: {lat: 59.3147, lng: 18.1093}},
-          {title: 'Boule & Berså', location: {lat: 59.3139, lng: 18.1061}},
-          {title: 'Pizzerian på andra sidan bron', location: {lat: 59.3124, lng: 18.1065}},
-          {title: 'Gula huset, Manngrynskvarnen', location: {lat: 59.3142, lng: 18.1106}},
-          {title: 'Henriksdals Station, mot Slussen', location: {lat: 59.3123, lng: 18.1079}}
-        ];
+    function initMap() {
+      // Constructor creates a new map - only center and zoom are required.
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: 59.313335,
+          lng: 18.107858
+        },
+        zoom: 18,
+        mapTypeControl: false
+      });
 
-        infoWindow = new google.maps.InfoWindow;
+      // These are the real estate listings that will be shown to the user.
+      // Normally we'd have these in a database instead.
+      var locations = [{
+          title: 'Skolan 607', location: { lat: 59.3134, lng: 18.1108 }
+        },
+        { title: 'Elite Hotel Marina Tower', location: { lat: 59.3147, lng: 18.1093 }
+        },
+        { title: 'Boule & Berså', location: { lat: 59.3139, lng: 18.1061 }
+        },
+        { title: 'Pizzerian på andra sidan bron', location: { lat: 59.3124, lng: 18.1065 }
+        },
+        { title: 'Gula huset, Manngrynskvarnen', location: { lat: 59.3142, lng: 18.1106 }
+        },
+        { title: 'Henriksdals Station, mot Slussen', location: { lat: 59.3123, lng: 18.1079 }
+        }
+      ];
 
-        if (navigator.geolocation) {
+      infoWindow = new google.maps.InfoWindow;
+
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
           };
 
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
+          var playerIcon = 'icon1.png';
+          var userlocation = new google.maps.Marker({
+            position: pos,
+            map: map,
+            icon: playerIcon,
+            animation: google.maps.Animation.DROP
+          });
           map.setCenter(pos);
+
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -181,137 +141,79 @@
         handleLocationError(false, infoWindow, map.getCenter());
       }
 
+      // The following group uses the location array to create an array of markers on initialize.
+      for (var i = 0; i < locations.length; i++) {
+        // Get the position from the location array.
+        var position = locations[i].location;
+        allMarkers.push(position);
+        var title = locations[i].title;
+        // Create a marker per location, and put into markers array.
+        var questionMarker = 'checkpoint.png';
+        var marker = new google.maps.Marker({
+          position: position,
+          title: title,
+          animation: google.maps.Animation.DROP,
+          id: i,
+          map: map,
+          icon: questionMarker
+        });
+        // Push the marker to our array of markers.
+        markers.push(marker);
+        // Create an onclick event to open an infowindow at each marker.
+        marker.addListener('click', function() {
+          populateInfoWindow(this, infoWindow);
+        });
+      }
 
-        // The following group uses the location array to create an array of markers on initialize.
-        for (var i = 0; i < locations.length; i++) {
-          // Get the position from the location array.
-          var position = locations[i].location;
-          allMarkers.push(position);
-          var title = locations[i].title;
-          // Create a marker per location, and put into markers array.
-           var marker = new google.maps.Marker({
-            position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            id: i
-          });
-          // Push the marker to our array of markers.
-          markers.push(marker);
-          // Create an onclick event to open an infowindow at each marker.
-          marker.addListener('click', function() {
-            populateInfoWindow(this, infoWindow);
-          });
-        }
-
-
-        if (navigator.geolocation) {
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-
-
 
           // code belo will match the usersposition with checkpoint in one array
           userPosition.push(pos);
-          console.log(userPosition);
-          // +() changes string into number
-          for (var i = 0; i < userPosition.length; i++){
-            userPosition[i].lat = +(userPosition[i].lat.toFixed(4));
-            userPosition[i].lng = +(userPosition[i].lng.toFixed(4));
 
+          //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
+          for (var i = 0; i < allMarkers.length; i++) {
+            n = arePointsNear(pos, allMarkers[i], 0.02);
+            if (n) {
+              alert('You have reached the checkpoint');
+              break;
+            } else {
+              alert('Your position doesnt match');
+              break;
+            }
           }
-
-          //console.log(allMarkers);
-          if((userPosition[0].lng && userPosition[0].lat) === (allMarkers[0].lng && allMarkers[0].lat))   {
-             $('#\\#myModal').modal('show');
-          } else {
-            alert('Your position doesnt match');
-          }
-
-          for(var i=0; i < allMarkers.length; i++) {
-          var x = allMarkers[i].lat.toFixed(4);
-          var y = allMarkers[i].lng.toFixed(4);
-          console.log(x, y);
-        }
-        // below code with show current location of user
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
-          map.setCenter(pos);
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
         });
-
-
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
       }
+    }
 
-      // This function populates the infowindow when the marker is clicked. We'll only allow
-      // one infowindow which will open at the marker that is clicked, and populate based
-      // on that markers position.
-      function populateInfoWindow(marker, infowindow) {
-        // Check to make sure the infowindow is not already opened on this marker.
-        if (infowindow.marker != marker) {
-          infowindow.marker = marker;
-          infowindow.setContent('<div>' + marker.title + '</div>');
-          infowindow.open(map, marker);
-          // Make sure the marker property is cleared if the infowindow is closed.
-          infowindow.addListener('closeclick', function() {
-            infowindow.marker = null;
-          });
-        }
+    // This function will loop through the markers array and display them all.
+    function showListings() {
+      var bounds = new google.maps.LatLngBounds();
+      // Extend the boundaries of the map for each marker and display the marker
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+        bounds.extend(markers[i].position);
       }
+      map.fitBounds(bounds);
+    }
 
-      // This function will loop through the markers array and display them all.
-      function showListings() {
-        var bounds = new google.maps.LatLngBounds();
-        // Extend the boundaries of the map for each marker and display the marker
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-          bounds.extend(markers[i].position);
-        }
-        map.fitBounds(bounds);
+    // This function will loop through the listings and hide them all.
+    function hideListings() {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
       }
+    };
+  </script>
 
-      // This function will loop through the listings and hide them all.
-      function hideListings() {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-        }
-      }
-     setTimeout(function(){
-     $('#\\#myModal').modal('hide')
-     }, 10000);
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKaTEcXEwrYDxqz13MUpAQZXnv0N78_vk&callback=initMap">
+  </script>
 
+</body>
 
-
-    </script>
-        <script>
-      jQuery('.button1').click(function() {
-  
-  if (!jQuery(this).hasClass('active')) {
-    jQuery('.button1').removeClass('active');
-    jQuery(this).toggleClass('active');
-  }
-});
-        </script>
-    <script async defer
-        src=
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBKaTEcXEwrYDxqz13MUpAQZXnv0N78_vk&callback=initMap">
-    </script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="api.js"></script>
-
-
-  </body>
 </html>
