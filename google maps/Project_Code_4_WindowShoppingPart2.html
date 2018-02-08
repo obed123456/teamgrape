@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="css.css">
   <style>
     html,
     body {
@@ -54,9 +55,10 @@
 </head>
 
 <body>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <div class="container">
     <div class="options-box">
-      <h1>Find Your New NYC Home</h1>
+      <h1>Amazing Fkn Game</h1>
       <div>
         <input id="show-listings" type="button" value="Show Listings">
         <input id="hide-listings" type="button" value="Hide Listings">
@@ -64,6 +66,69 @@
     </div>
     <div id="map"></div>
   </div>
+  	<!--Modal-->
+<div class="modal fade" id="#myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+        </button>
+        <h4 class="modal-title"><center>You reached the <b>first</b> Checkpoint</center></h4>
+
+      </div>
+      <div class="modal-body">
+
+	    <div id="quiz">
+
+
+  <div id="q1">
+    <h1 id="demo"></h1>
+	<div id="scramble-buttons">
+<button type="button" class="button1" OnClick="DisableButtons()" >
+              <p id="test"></p>
+
+   </button>
+
+<button type="button" class="button12" OnClick="DisableButtons()" >
+               <p id="test1"></p> <!--Right Answer-->
+
+   </button>
+
+<button type="button" class="button1" OnClick="DisableButtons()" >
+               <p id="test2"></p>
+
+   </button>
+   <button type="button" class="button1" OnClick="DisableButtons()" >
+               <p id="test3"></p>
+
+   </button>
+  </div>
+  </div>
+</div>
+</div>
+      <div class="modal-footer">
+		<div id="countdown">
+  <div id="container">
+      <div class="n">10</div>
+    <div class="n">9</div>
+    <div class="n">8</div>
+    <div class="n">7</div>
+    <div class="n">6</div>
+    <div class="n">5</div>
+    <div class="n">4</div>
+    <div class="n">3</div>
+    <div class="n">2</div>
+    <div class="n">1</div>
+    <div class="n">0</div>
+  </div>
+</div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
   <script>
     var map, infoWindow, n;
 
@@ -430,7 +495,7 @@
           for (var i = 0; i < allMarkers.length; i++) {
             n = arePointsNear(pos, allMarkers[i], 0.02);
             if (n) {
-              alert('You have reached the checkpoint');
+              $('#\\#myModal').modal('show');
               break;
             } else {
               alert('Your position doesnt match');
@@ -460,10 +525,51 @@
         markers[i].setMap(null);
       }
     };
+	function myFunction() {
+    alert("Right answer");
+}
+$('button1').on('click', function() {
+    $(this).prop('disabled', true);
+});
+
+   setTimeout(function(){
+     $('#\\#myModal').modal('hide')
+     }, 10000);
+    </script>
+        <script>
+      jQuery('.button1').click(function() {
+
+	    if (!jQuery(this).hasClass('wrong-answer')) {
+    jQuery('.button1').removeClass('wrong-answer');
+    jQuery(this).toggleClass('wrong-answer');
+  }
+
+});
+      jQuery('.button12').click(function() {
+
+	    if (!jQuery(this).hasClass('right-answer')) {
+    jQuery('.button12').removeClass('right-answer');
+    jQuery(this).toggleClass('right-answer');
+  }
+
+});
+
+function DisableButtons()
+{
+    $(".button1").attr("disabled", true);
+	$(".button12").attr("disabled", true);
+}
+
+
   </script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKaTEcXEwrYDxqz13MUpAQZXnv0N78_vk&callback=initMap">
   </script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="api.js"></script>
+
 
 </body>
 
