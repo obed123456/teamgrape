@@ -90,21 +90,21 @@
   <div id="q1">
     <h1 id="demo"></h1>
 	<div id="scramble-buttons">
-<button type="button" class="button1" OnClick="DisableButtons()" >
+<button type="button" class="button1" OnClick="DisableButtons(); incorrect1()"" >
               <p id="test"></p>
 
    </button>
 
-<button type="button" class="button12" OnClick="DisableButtons(); myFunction()" >
-               <p id="test1"></p> <!--Right Answer-->
+<button type="button" class="button12" OnClick="DisableButtons(); correct()" >
+               <p id="test1"></p> <!--correct Answer-->
 
    </button>
 
-<button type="button" class="button1" OnClick="DisableButtons()" >
+<button type="button" class="button1" OnClick="DisableButtons(); incorrect2()"  >
                <p id="test2"></p>
 
    </button>
-   <button type="button" class="button1" OnClick="DisableButtons()" >
+   <button type="button" class="button1" OnClick="DisableButtons(); incorrect3()" " >
                <p id="test3"></p>
 
    </button>
@@ -131,12 +131,15 @@
 
     // Create a new blank array for all the listing markers.
     var markers = [];
+    console.log(markers);
 
     //users Current location
     var userPosition = [];
 
     //All markers from the list only cordinates lat lng
     var allMarkers = [];
+    //Correct answers
+    var correctAnswer = [];
 
     // circle around marker
     function arePointsNear(checkPoint, centerPoint, km) {
@@ -156,7 +159,7 @@
         },
         zoom: 18,
         mapTypeControl: false,
-      styles:  [
+        styles:  [
   {
     "elementType": "geometry",
     "stylers": [
@@ -411,10 +414,11 @@
 
       // These are the real estate listings that will be shown to the user.
       // Normally we'd have these in a database instead.
-      var locations = [{
-          title: 'Skolan 607', location: { lat: 59.3134, lng: 18.1108 }
-        },
-        { title: 'Elite Hotel Marina Tower', location: { lat: 59.3147, lng: 18.1093 }
+      var locations = [
+        // {
+        //   title: 'Skolan 607', location: { lat: 59.3134, lng: 18.1108 }
+        // },
+        { title: 'Skolan', location: { lat: 59.313303, lng: 18.110104 }
         },
         { title: 'Boule & Berså', location: { lat: 59.3139, lng: 18.1061 }
         },
@@ -452,7 +456,10 @@
               });
               userlocation.setPosition(pos);
             }
-             
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+
           
           map.setCenter(pos);
            navigator.geolocation.clearWatch(id);
@@ -484,11 +491,13 @@
         });
         // Push the marker to our array of markers.
         markers.push(marker);
+        
         // Create an onclick event to open an infowindow at each marker.
         marker.addListener('click', function() {
           populateInfoWindow(this, infoWindow);
         });
       }
+      
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -503,8 +512,22 @@
           //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
           for (var i = 0; i < allMarkers.length; i++) {
             n = arePointsNear(pos, allMarkers[i], 0.02);
+            console.log(allMarkers[i]);
             if (n) {
+              // markers[0].splice[0,1];
+              // markers[0].setMap(null);
               $('#\\#myModal').modal('show');
+              // markers[0].setMap(null);
+              console.log(marker);
+              // if(openmodal){
+              //   allMarkers[i].splice  
+              //   if(correctanswer){
+              //     // spara i en array push method
+              //     if(array >= 5){
+              //       //console.log winner
+              //     }
+              //   }
+              // }
               break;
             } else {
               alert('Your position doesnt match');
@@ -542,9 +565,9 @@ $('button1').on('click', function() {
     $(this).prop('disabled', true);
 });
 
-  /* setTimeout(function(){
+   setTimeout(function(){
      $('#\\#myModal').modal('hide')
-     }, 16000);*/
+     }, 16000);
     </script>
         <script>
       jQuery('.button1').click(function() {
@@ -570,9 +593,21 @@ function DisableButtons()
 	$(".button12").attr("disabled", true);
 }
 
-function myFunction() {
-    document.getElementById("test1").innerHTML = "Rätt svar";
+function correct() {
+    document.getElementById("test1").innerHTML = "Correct answer";
 	  setTimeout(function(){ $('#\\#myModal').modal('hide');; }, 1000);
+	
+}
+function incorrect1() {
+    document.getElementById("test").innerHTML = "Incorrect Answer!";
+	
+}
+function incorrect2() {
+    document.getElementById("test2").innerHTML = "Incorrect Answer!";
+	
+}
+function incorrect3() {
+    document.getElementById("test3").innerHTML = "Incorrect Answer!";
 	
 }
 
