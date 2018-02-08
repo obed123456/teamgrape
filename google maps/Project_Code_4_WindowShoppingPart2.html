@@ -134,12 +134,15 @@
 
     // Create a new blank array for all the listing markers.
     var markers = [];
+    console.log(markers);
 
     //users Current location
     var userPosition = [];
 
     //All markers from the list only cordinates lat lng
     var allMarkers = [];
+    //Correct answers
+    var correctAnswer = [];
 
     // circle around marker
     function arePointsNear(checkPoint, centerPoint, km) {
@@ -159,7 +162,7 @@
         },
         zoom: 18,
         mapTypeControl: false,
-      styles:  [
+        styles:  [
   {
     "elementType": "geometry",
     "stylers": [
@@ -482,11 +485,13 @@
         });
         // Push the marker to our array of markers.
         markers.push(marker);
+        
         // Create an onclick event to open an infowindow at each marker.
         marker.addListener('click', function() {
           populateInfoWindow(this, infoWindow);
         });
       }
+      
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -501,8 +506,22 @@
           //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
           for (var i = 0; i < allMarkers.length; i++) {
             n = arePointsNear(pos, allMarkers[i], 0.02);
+            console.log(allMarkers[i]);
             if (n) {
+              markers[0].splice[0,1];
+              markers[0].setMap(null);
               $('#\\#myModal').modal('show');
+              // markers[0].setMap(null);
+              console.log(marker);
+              // if(openmodal){
+              //   allMarkers[i].splice  
+              //   if(correctanswer){
+              //     // spara i en array push method
+              //     if(array >= 5){
+              //       //console.log winner
+              //     }
+              //   }
+              // }
               break;
             } else {
               alert('Your position doesnt match');
