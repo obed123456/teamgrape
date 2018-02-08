@@ -90,21 +90,21 @@
   <div id="q1">
     <h1 id="demo"></h1>
 	<div id="scramble-buttons">
-<button type="button" class="button1" OnClick="DisableButtons()" >
+<button type="button" class="button1" OnClick="DisableButtons(); incorrect1()"" >
               <p id="test"></p>
 
    </button>
 
-<button type="button" class="button12" OnClick="DisableButtons(); myFunction()" >
-               <p id="test1"></p> <!--Right Answer-->
+<button type="button" class="button12" OnClick="DisableButtons(); correct()" >
+               <p id="test1"></p> <!--correct Answer-->
 
    </button>
 
-<button type="button" class="button1" OnClick="DisableButtons()" >
+<button type="button" class="button1" OnClick="DisableButtons(); incorrect2()"  >
                <p id="test2"></p>
 
    </button>
-   <button type="button" class="button1" OnClick="DisableButtons()" >
+   <button type="button" class="button1" OnClick="DisableButtons(); incorrect3()" " >
                <p id="test3"></p>
 
    </button>
@@ -570,9 +570,21 @@ function DisableButtons()
 	$(".button12").attr("disabled", true);
 }
 
-function myFunction() {
-    document.getElementById("test1").innerHTML = "Rätt svar";
+function correct() {
+    document.getElementById("test1").innerHTML = "Correct answer";
 	  setTimeout(function(){ $('#\\#myModal').modal('hide');; }, 1000);
+	
+}
+function incorrect1() {
+    document.getElementById("test").innerHTML = "Incorrect Answer!";
+	
+}
+function incorrect2() {
+    document.getElementById("test2").innerHTML = "Incorrect Answer!";
+	
+}
+function incorrect3() {
+    document.getElementById("test3").innerHTML = "Incorrect Answer!";
 	
 }
 
