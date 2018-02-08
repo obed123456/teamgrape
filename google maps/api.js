@@ -598,7 +598,7 @@ var allAnswer;
 var allAnswers = [];
 var iRandom = Math.floor((Math.random() * 49) + 1);
 for (i in questions.results) {
-  x = "<h2>" + iRandom + ". " + questions.results[iRandom].question + "</h2>";
+  x = "<h2>" + questions.results[iRandom].question + "</h2>";
   y = "<p>" + questions.results[iRandom].correct_answer + "</p>";
   n = "<p>" + questions.results[iRandom].incorrect_answers[0] + "</p>";
   h = "<p>" + questions.results[iRandom].incorrect_answers[1] + "</p>";
