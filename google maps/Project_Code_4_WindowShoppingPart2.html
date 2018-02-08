@@ -49,6 +49,9 @@
         text-align: left;
         width: 340px;
       }
+      .show {
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -58,6 +61,7 @@
         <div>
           <input id="show-listings" type="button" value="Show Listings">
           <input id="hide-listings" type="button" value="Hide Listings">
+          <input id="get-your-position" type="button" value="Get your location">
         </div>
       </div>
       <div id="map"></div>
@@ -101,11 +105,19 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
+          var image = 'icon1.png';
+          var marker1 = new google.maps.Marker({
+            position: pos, 
+            map: map,
+            icon: image,
+            infoWindow: null
+            
+          });
+          //infoWindow.setPosition(pos);
+          //infoWindow.setContent(null);          
+          //infoWindow.open(map);
           map.setCenter(pos);
+          
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -124,11 +136,14 @@
           allMarkers.push(position);
           var title = locations[i].title;
           // Create a marker per location, and put into markers array.
+          var image = 'icon1.png';
            var marker = new google.maps.Marker({
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
-            id: i
+            id: i,
+            icon: image
+    
           });
           // Push the marker to our array of markers.
           markers.push(marker);
@@ -153,8 +168,8 @@
           console.log(userPosition);
           // +() changes string into number
           for (var i = 0; i < userPosition.length; i++){
-            userPosition[i].lat = +(userPosition[i].lat.toFixed(6)); 
-            userPosition[i].lng = +(userPosition[i].lng.toFixed(6)); 
+            userPosition[i].lat = +(userPosition[i].lat.toFixed(4)); 
+            userPosition[i].lng = +(userPosition[i].lng.toFixed(4)); 
 
           }        
           
@@ -171,8 +186,8 @@
         }
         // below code with show current location of user
           infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
+          //infoWindow.setContent('Location found.');
+          //infoWindow.open(map);
           map.setCenter(pos);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -186,6 +201,7 @@
 
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
+        document.getElementById('get-your-position').addEventListener('click', getPosition);
       }
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -195,7 +211,7 @@
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
           infowindow.marker = marker;
-          infowindow.setContent('<div>' + marker.title + '</div>');
+          infowindow.setContent('<div>' + questions.question + '</div>');
           infowindow.open(map, marker);
           // Make sure the marker property is cleared if the infowindow is closed.
           infowindow.addListener('closeclick', function() {
@@ -223,13 +239,34 @@
       }
 
 
-    
+    //Get your own location 
+    /*
+    function getPosition() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }*/
 
     </script>
 
     <script async defer
         src=
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBCf1a3pdRD9vKgTf7q43hX4PK5EUD7alk&v=3&callback=initMap">
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAHDWii1UGzHkZf0sUmMC0XhBkTdxUdrmU&callback=initMap">
     </script>
 
   </body>
