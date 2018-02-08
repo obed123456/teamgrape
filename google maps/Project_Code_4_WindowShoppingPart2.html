@@ -431,11 +431,11 @@
 
       infoWindow = new google.maps.InfoWindow;
       
-   
+      var watching = false;
 
-      var id;
       if (navigator.geolocation) {
-        id = navigator.geolocation.watchPosition(function(position) {
+        navigator.geolocation.watchPosition(function(position) {
+          if(!watching) {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -452,9 +452,11 @@
             icon: playerIcon,
             animation: google.maps.Animation.DROP
           });
-          userlocation.setPosition(pos);
+            
+          watching = true;
+        }
+
           map.setCenter(pos);
-           navigator.geolocation.clearWatch(id);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
