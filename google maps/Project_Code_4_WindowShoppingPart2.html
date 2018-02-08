@@ -433,9 +433,9 @@
       
    
 
-
+      var id;
       if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(function(position) {
+        id = navigator.geolocation.watchPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -453,7 +453,7 @@
             animation: google.maps.Animation.DROP
           });
           map.setCenter(pos);
-
+           navigator.geolocation.clearWatch(id);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
