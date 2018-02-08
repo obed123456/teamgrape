@@ -439,7 +439,7 @@
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            nableHighAccuracy: false,
+            enableHighAccuracy: false,
             timeout: 3000,
             maximumAge: 0,
             distanceFilter: 1
@@ -452,8 +452,8 @@
             icon: playerIcon,
             animation: google.maps.Animation.DROP
           });
+          userlocation.setPosition(pos);
           map.setCenter(pos);
-          
            navigator.geolocation.clearWatch(id);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
