@@ -444,7 +444,7 @@
             maximumAge: 0,
             distanceFilter: 1
           };
-
+          
           var playerIcon = 'icon1.png';
           var userlocation = new google.maps.Marker({
             position: pos,
@@ -452,8 +452,10 @@
             icon: playerIcon,
             animation: google.maps.Animation.DROP
           });
+            
           watching = true;
         }
+
           map.setCenter(pos);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
