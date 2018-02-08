@@ -4,6 +4,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css.css">
   <style>
+  
+  *{
+  
+  
+  }
     html,
     body {
       font-family: Arial, sans-serif;
@@ -67,7 +72,7 @@
     <div id="map"></div>
   </div>
   	<!--Modal-->
-<div class="modal fade" id="#myModal">
+<div class="modal fade" id="#myModal" data-controls-modal="#mymodal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -90,7 +95,7 @@
 
    </button>
 
-<button type="button" class="button12" OnClick="DisableButtons()" >
+<button type="button" class="button12" OnClick="DisableButtons(); myFunction()" >
                <p id="test1"></p> <!--Right Answer-->
 
    </button>
@@ -105,24 +110,16 @@
    </button>
   </div>
   </div>
+    <div class="countdown"></div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
+
+  
+
+    <script  src="index.js"></script>
+	<br>
 </div>
 </div>
       <div class="modal-footer">
-		<div id="countdown">
-  <div id="container">
-      <div class="n">10</div>
-    <div class="n">9</div>
-    <div class="n">8</div>
-    <div class="n">7</div>
-    <div class="n">6</div>
-    <div class="n">5</div>
-    <div class="n">4</div>
-    <div class="n">3</div>
-    <div class="n">2</div>
-    <div class="n">1</div>
-    <div class="n">0</div>
-  </div>
-</div>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -545,9 +542,9 @@ $('button1').on('click', function() {
     $(this).prop('disabled', true);
 });
 
-   setTimeout(function(){
+  /* setTimeout(function(){
      $('#\\#myModal').modal('hide')
-     }, 10000);
+     }, 16000);*/
     </script>
         <script>
       jQuery('.button1').click(function() {
@@ -573,6 +570,11 @@ function DisableButtons()
 	$(".button12").attr("disabled", true);
 }
 
+function myFunction() {
+    document.getElementById("test1").innerHTML = "Rätt svar";
+	  setTimeout(function(){ $('#\\#myModal').modal('hide');; }, 1000);
+	
+}
 
   </script>
 
