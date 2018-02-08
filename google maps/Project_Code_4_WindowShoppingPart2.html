@@ -431,33 +431,34 @@
 
       infoWindow = new google.maps.InfoWindow;
       
-      var watching = false;
+     var userlocation = null;
 
+      var id;
       if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(function(position) {
-          if(!watching) {
+        id = navigator.geolocation.watchPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            enableHighAccuracy: false,
+            nableHighAccuracy: false,
             timeout: 3000,
             maximumAge: 0,
             distanceFilter: 1
           };
+          if (userlocation != null) {
+              userlocation.setPosition(latlon); 
+            } else {
+              userlocation = new google.maps.Marker({
+              position: pos,
+              map: map,
+              icon: 'icon1.png',
+              animation: google.maps.Animation.DROP
+              });
+              userlocation.setPosition(pos);
+            }
+             
           
-          var playerIcon = 'icon1.png';
-          var userlocation = new google.maps.Marker({
-            position: pos,
-            map: map,
-            icon: playerIcon,
-            animation: google.maps.Animation.DROP
-          });
-            
-          watching = true;
-          userlocation.setContent(pos);
-        }
-
           map.setCenter(pos);
+           navigator.geolocation.clearWatch(id);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
