@@ -67,7 +67,7 @@ function initMap() {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-        EnableHighAccuracy: false,
+        EnableHighAccuracy: true,
         timeout: 3000,
         maximumAge: 0,
         distanceFilter: 1,
@@ -80,12 +80,20 @@ function initMap() {
             icon: 'img/icon1.png',
             animation: google.maps.Animation.DROP
       });
+      
+      function clearWatch() {
+        if(userlocation != null){
+          navigator.geolocation.clearWatch(userlocation);
+          userlocation = null;
+        }
+      }
+      
       // if (userlocation != null) {
       //     userlocation.setPosition(pos); 
       //   } else {
       //     userlocation = new google.maps.Marker({
       //     position: pos,
-      //     map: map,
+      //     map: map,aler
       //     icon: 'img/icon1.png',
       //     animation: google.maps.Animation.DROP
       //     });
