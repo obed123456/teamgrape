@@ -41,21 +41,16 @@ function initMap() {
   // These are the real estate listings that will be shown to the user.
   // Normally we'd have these in a database instead.
   var locations = [
-    {
-      title: 'Skolan 607', location: { lat: 59.3134, lng: 18.1108 }
-    },
-    { title: 'Skolan', location: { lat: 59.313303, lng: 18.110104 }
-    },
-    { title: 'Boule & Berså', location: { lat: 59.3139, lng: 18.1061 }
-    },
-    { title: 'Pizzerian på andra sidan bron', location: { lat: 59.3124, lng: 18.1065 }
-    },
-    { title: 'Gula huset, Manngrynskvarnen', location: { lat: 59.3142, lng: 18.1106 }
-    },
-    { title: 'Henriksdals Station, mot Slussen', location: { lat: 59.3123, lng: 18.1079 }
-    }
+[59.3134, 18.1108], 
+[59.313303, 18.110104], 
+[59.3139, 18.1061],
+[59.3124, 18.1065],
+[59.3142, 18.1106] ,
+[59.3123, 18.1079]   
   ];
-
+locations.forEach( (element) =>{
+  console.log({lat: element[0], lng: element[1]});
+});
 
   infoWindow = new google.maps.InfoWindow;
   
@@ -71,64 +66,53 @@ function initMap() {
         timeout: 3000,
         maximumAge: 0,
         distanceFilter: 1,
-
       };
 
-      // userlocation = new google.maps.Marker({
-      //       position: pos,
-      //       map: map,
-      //       icon: 'img/icon1.png',
-      //       animation: google.maps.Animation.DROP
-      // });
-      
-      // function clearWatch() {
-      //   if(userlocation != null){
-      //     navigator.geolocation.clearWatch(userlocation);
-      //     userlocation = null;
-      //   }
-      // }
-      
-      // if (userlocation != null) {
-      //     userlocation.setPosition(pos); 
-      //   } else {
-      //     userlocation = new google.maps.Marker({
-      //     position: pos,
-      //     map: map,aler
-      //     icon: 'img/icon1.png',
-      //     animation: google.maps.Animation.DROP
-      //     });
-      //     userlocation.setPosition(pos);
-      //   }
         infoWindow.setPosition(pos);
         infoWindow.setContent('<img src="' + 'img/icon1.png' +  '"/>');
         infoWindow.open(map);
+        map.setCenter(pos);
 
-      
-      map.setCenter(pos);
-      for (var i = 0; i < newArray2.length; i++) {
-        n = arePointsNear(pos, newArray2[i], 0.02);
-        console.log("n: " +  n);
+      //checking position if user is close enough
+      locations.forEach( (element) =>{
+        var latlng = {lat: element[0], lng: element[1]};
+        
+        n = arePointsNear(pos, latlng, 0.02);
+        console.log(n);
+        
         if (n) {          
           $('#\\#myModal').modal('show');
           //console.log(locations[i].location);
-          newArray2.splice(newArray2[i], 1);
-          //var answers = [];
-  
-          // if(correctAnswer) {
-          //   answers += 1; 
-          //   if(answers >= 5){
-          //      console.log()
-          //   }
-          // }
-  
-          break;
+          // newArray2.splice(newArray2[i], 1);
+          // break;  
           //console.log(n);
         } else {
           console.log('Your position doesnt match');
-          break;
+          // break;
         }
-      }
-       //navigator.geolocation.clearWatch(id);
+
+      });
+
+
+      // for (var i = 0; i < locations.length; i++) {
+      //   //lat and lng can we get from api
+      //  var latlng = {lat: locations[i][0],  lng: locations[i][1]};
+      //  console.log(latlng);
+
+      //   n = arePointsNear(pos, latlng, 0.02);
+      //   console.log(n);
+
+      //   if (n) {          
+      //     $('#\\#myModal').modal('show');
+      //     //console.log(locations[i].location);
+      //     // newArray2.splice(newArray2[i], 1);
+      //     break;    
+      //     //console.log(n);
+      //   } else {
+      //     alert('Your position doesnt match');
+      //     break;
+      //   }
+      // }
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -143,23 +127,8 @@ function initMap() {
   for (var i = 0; i < locations.length; i++) {
     // Get the position from the location array.
     var position = locations[i].location;
+    console.log(position);
     var title = locations[i].title;
-  
-
-      // fetch('http://localhost:3000/getposts')
-      // Access-Control-Allow-Origin *
-      // then((res) => res.json())
-      // .then(data => obj = data)
-      // .then(console.log)
-      // .then(() => console.log(obj));
-      
-    
-
-
-
-    newArray2.push(position);
-
-
 //check usersposition
 
 if (navigator.geolocation) {
@@ -169,35 +138,11 @@ if (navigator.geolocation) {
       lng: position.coords.longitude
     };
  
-    //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
-    for (var i = 0; i < newArray2.length; i++) {
-      n = arePointsNear(pos, newArray2[i], 0.02);
-      
-      if (n) {          
-        $('#\\#myModal').modal('show');
-        //console.log(locations[i].location);
-        newArray2.splice(newArray2[i], 1);
-        //var answers = [];
 
-        // if(correctAnswer) {
-        //   answers += 1; 
-        //   if(answers >= 5){
-        //      console.log()
-        //   }
-        // }
-
-        break;
-        //console.log(n);
-      } else {
-        console.log('Your position doesnt match');
-        break;
-      }
-    }
-
-
-   for (var i = 0; i < newArray2.length; i++) {
+   for (var i = 0; i < locations.length; i++) {
      //lat and lng can we get from api
-    var latlng = {lat: newArray2[i].lat,   lng: newArray2[i].lng};
+    var latlng = {lat: locations[i][0],  lng: locations[i][1]};
+    //console.log(latlng);
     var questionMarker = './img/checkpoint.png';
     var marker = new google.maps.Marker({
       position: latlng,
@@ -215,26 +160,26 @@ if (navigator.geolocation) {
     
 
     });
-    document.getElementById('show-listings').addEventListener('click', showListings);
-    document.getElementById('hide-listings').addEventListener('click', hideListings);
+    // document.getElementById('show-listings').addEventListener('click', showListings);
+    // document.getElementById('hide-listings').addEventListener('click', hideListings);
   }
  }
 }
 
 // This function will loop through the markers array and display them all.
-function showListings() {
-  var bounds = new google.maps.LatLngBounds();
-  // Extend the boundaries of the map for each marker and display the marker
-  for (var i = 0; i < newArray2.length; i++) {
-    newArray2[i].setMap(map);
-    bounds.extend(newArray2[i].position);
-  }
-  map.fitBounds(bounds);
-}
+// function showListings() {
+//   var bounds = new google.maps.LatLngBounds();
+//   // Extend the boundaries of the map for each marker and display the marker
+//   for (var i = 0; i < newArray2.length; i++) {
+//     newArray2[i].setMap(map);
+//     bounds.extend(newArray2[i].position);
+//   }
+//   map.fitBounds(bounds);
+// }
 
-// This function will loop through the listings and hide them all.
-function hideListings() {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  }
-};
+// // This function will loop through the listings and hide them all.
+// function hideListings() {
+//   for (var i = 0; i < markers.length; i++) {
+//     markers[i].setMap(null);
+//   }
+// };
