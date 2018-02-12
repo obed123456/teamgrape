@@ -116,7 +116,7 @@ function initMap() {
           break;
           //console.log(n);
         } else {
-          alert('Your position doesnt match');
+          console.log('Your position doesnt match');
           break;
         }
       }
