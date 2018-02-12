@@ -71,64 +71,27 @@ function initMap() {
         timeout: 3000,
         maximumAge: 0,
         distanceFilter: 1,
-
       };
 
-      // userlocation = new google.maps.Marker({
-      //       position: pos,
-      //       map: map,
-      //       icon: 'img/icon1.png',
-      //       animation: google.maps.Animation.DROP
-      // });
-      
-      // function clearWatch() {
-      //   if(userlocation != null){
-      //     navigator.geolocation.clearWatch(userlocation);
-      //     userlocation = null;
-      //   }
-      // }
-      
-      // if (userlocation != null) {
-      //     userlocation.setPosition(pos); 
-      //   } else {
-      //     userlocation = new google.maps.Marker({
-      //     position: pos,
-      //     map: map,aler
-      //     icon: 'img/icon1.png',
-      //     animation: google.maps.Animation.DROP
-      //     });
-      //     userlocation.setPosition(pos);
-      //   }
         infoWindow.setPosition(pos);
         infoWindow.setContent('<img src="' + 'img/icon1.png' +  '"/>');
         infoWindow.open(map);
+        map.setCenter(pos);
 
-      
-      map.setCenter(pos);
-      for (var i = 0; i < newArray2.length; i++) {
-        n = arePointsNear(pos, newArray2[i], 0.02);
-        console.log("n: " +  n);
+      //checking position if user is close enough
+      for (var i = 0; i < locations.length; i++) {
+        n = arePointsNear(pos, locations[i].location, 0.02);
         if (n) {          
           $('#\\#myModal').modal('show');
           //console.log(locations[i].location);
-          newArray2.splice(newArray2[i], 1);
-          //var answers = [];
-  
-          // if(correctAnswer) {
-          //   answers += 1; 
-          //   if(answers >= 5){
-          //      console.log()
-          //   }
-          // }
-  
-          break;
+          // newArray2.splice(newArray2[i], 1);
+          break;    
           //console.log(n);
         } else {
-          console.log('Your position doesnt match');
+          alert('Your position doesnt match');
           break;
         }
       }
-       //navigator.geolocation.clearWatch(id);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -143,6 +106,7 @@ function initMap() {
   for (var i = 0; i < locations.length; i++) {
     // Get the position from the location array.
     var position = locations[i].location;
+    console.log(position);
     var title = locations[i].title;
   
 
@@ -157,7 +121,7 @@ function initMap() {
 
 
 
-    newArray2.push(position);
+    //newArray2.push(position);
 
 
 //check usersposition
@@ -168,7 +132,7 @@ if (navigator.geolocation) {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
- 
+ /*
     //Loops through allMarkers and alerts if userposition is <= 20m of any marker in allMarkers array
     for (var i = 0; i < newArray2.length; i++) {
       n = arePointsNear(pos, newArray2[i], 0.02);
@@ -193,11 +157,12 @@ if (navigator.geolocation) {
         break;
       }
     }
+*/
+  
 
-
-   for (var i = 0; i < newArray2.length; i++) {
+   for (var i = 0; i < locations.length; i++) {
      //lat and lng can we get from api
-    var latlng = {lat: newArray2[i].lat,   lng: newArray2[i].lng};
+    var latlng = {lat: locations[i].location.lat,   lng: locations[i].location.lng};
     var questionMarker = './img/checkpoint.png';
     var marker = new google.maps.Marker({
       position: latlng,
