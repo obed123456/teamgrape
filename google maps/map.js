@@ -74,19 +74,19 @@ function initMap() {
 
       };
 
-      userlocation = new google.maps.Marker({
-            position: pos,
-            map: map,
-            icon: 'img/icon1.png',
-            animation: google.maps.Animation.DROP
-      });
+      // userlocation = new google.maps.Marker({
+      //       position: pos,
+      //       map: map,
+      //       icon: 'img/icon1.png',
+      //       animation: google.maps.Animation.DROP
+      // });
       
-      function clearWatch() {
-        if(userlocation != null){
-          navigator.geolocation.clearWatch(userlocation);
-          userlocation = null;
-        }
-      }
+      // function clearWatch() {
+      //   if(userlocation != null){
+      //     navigator.geolocation.clearWatch(userlocation);
+      //     userlocation = null;
+      //   }
+      // }
       
       // if (userlocation != null) {
       //     userlocation.setPosition(pos); 
@@ -100,7 +100,7 @@ function initMap() {
       //     userlocation.setPosition(pos);
       //   }
         infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
+        infoWindow.setContent('<img src="' + 'img/icon1.png' +  '"/>');
         infoWindow.open(map);
 
       
