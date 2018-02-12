@@ -80,9 +80,6 @@ function initMap() {
             icon: 'img/icon1.png',
             animation: google.maps.Animation.DROP
       });
-      userlocation.setMap(map);
-      navigator.geolocation.clearWatch(id);
-      
       // if (userlocation != null) {
       //     userlocation.setPosition(pos); 
       //   } else {
@@ -123,7 +120,7 @@ function initMap() {
           break;
         }
       }
-       
+       //navigator.geolocation.clearWatch(id);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -184,7 +181,7 @@ if (navigator.geolocation) {
         break;
         //console.log(n);
       } else {
-        alert('Your position doesnt match');
+        console.log('Your position doesnt match');
         break;
       }
     }
