@@ -211,18 +211,6 @@ questions = {
 "category": "Science: Computers",
 "type": "multiple",
 "difficulty": "easy",
-"question": "What does the Prt Sc button do?",
-"correct_answer": "Captures what&#039;s on the screen and copies it to your clipboard",
-"incorrect_answers": [
-"Nothing",
-"Saves a .png file of what&#039;s on the screen in your screenshots folder in photos",
-"Closes all windows"
-]
-},
-{
-"category": "Science: Computers",
-"type": "multiple",
-"difficulty": "easy",
 "question": "What is the most preferred image format used for logos in the Wikimedia database?",
 "correct_answer": ".svg",
 "incorrect_answers": [
@@ -605,17 +593,24 @@ questions = {
 }
 ]
 }
-var iRandom = Math.floor((Math.random() * 50) + 1);
-// var splicedArray = questions.splice(iRandom, 1);
-// console.log(splicedArray);
+var allAnswer;
+var allAnswers = [];
+var iRandom = Math.floor((Math.random() * 49) + 1);
 for (i in questions.results) {
-  x = "<h2>" + iRandom + ". " + questions.results[iRandom].question + "</h2>" + "<br>"
-  + "<h3>" + questions.results[iRandom].correct_answer + "</h3>" + "<br>"
-  + "<button>" + questions.results[iRandom].incorrect_answers + "</button>";
-
-  // y += "<h3>" + questions.results[i].correct_answer + "</h3>";
-  // z += "<h4>" + questions.results[i].incorrect_answers + "</h4>";
-  console.log(y);
+  x = "<h2>" + questions.results[iRandom].question + "</h2>";
+  y = "<p>" + questions.results[iRandom].correct_answer + "</p>";
+  n = "<p>" + questions.results[iRandom].incorrect_answers[0] + "</p>";
+  h = "<p>" + questions.results[iRandom].incorrect_answers[1] + "</p>";
+  t = "<p>" + questions.results[iRandom].incorrect_answers[2] + "</p>";
+  var answers = [n , y , h , t];
+    $(function() {
+ $("#scramble-buttons").html($("#scramble-buttons").children().sort(function() { return 0.5 - Math.random() }));
+});
   document.getElementById("demo").innerHTML = x;
-  // document.getElementById("demo1").innerHTML = z;
+  document.getElementById("test").innerHTML = answers[0];
+  document.getElementById("test1").innerHTML = answers[1];
+  document.getElementById("test2").innerHTML = answers[2];
+  document.getElementById("test3").innerHTML = answers[3];
+
+
 }
