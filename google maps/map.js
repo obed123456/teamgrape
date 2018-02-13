@@ -1,19 +1,5 @@
 var map, infoWindow, n;
 
-// Create a new blank array for all the listing markers.
-var markers = [];
-
-//users Current location
-var userPosition = [];
-
-//All markers from the list only cordinates lat lng
-var allMarkers = [];
-//Correct answers
-var correctAnswer = [];
-
-var newArray2 = [];
-
-var spliced = [];
 
 // circle around marker
 function arePointsNear(checkPoint, centerPoint, km) {
@@ -47,7 +33,7 @@ function initMap() {
 [59.3124, 18.1065],
 [59.3142, 18.1106] ,
 [59.3123, 18.1079]   
-  ];
+];
 locations.forEach( (element) =>{
   console.log({lat: element[0], lng: element[1]});
 });
@@ -73,25 +59,66 @@ locations.forEach( (element) =>{
         infoWindow.open(map);
         map.setCenter(pos);
 
-      //checking position if user is close enough
+        var markerobjects = [];
+      //foreach loop will check in which marker and convert into object. 
+      //its the same array as location but with objects in it. 
       locations.forEach( (element) =>{
-        var latlng = {lat: element[0], lng: element[1]};
+        var latlng = {lat: element[0], lng: element[1]};        
+        markerobjects.push(latlng);
         
-        n = arePointsNear(pos, latlng, 0.02);
-        console.log(n);
-        
-        if (n) {          
+        n = arePointsNear(pos, latlng, 0.02);        
+        if (n === true) { 
+          //Because markerobjects and locations are the same we will remove marker then from location array. 
+
+          var match = markerobjects.indexOf(latlng);   
           $('#\\#myModal').modal('show');
-          //console.log(locations[i].location);
-          // newArray2.splice(newArray2[i], 1);
-          // break;  
-          //console.log(n);
+          var splicedMarker = locations.splice(match, 1);      
+          
+          for (var i = 0; i < locations.length; i++) {
+            //This will check how many markers are there in location array
+           var latlng = {lat: locations[i][0],  lng: locations[i][1]};
+
+           var questionMarker = './img/checkpoint.png';
+           var marker = new google.maps.Marker({
+             position: latlng,
+             title: title,
+             animation: google.maps.Animation.DROP,
+             id: i,
+             map: map,
+             icon: questionMarker
+           });
+
+         }
         } else {
           console.log('Your position doesnt match');
           // break;
         }
-
       });
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+
+
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+  // The following group uses the location array to create an array of markers on initialize.
+  for (var i = 0; i < locations.length; i++) {
+    // Get the position from the location array.
+    var position = locations[i].location;
+    console.log(position);
+    var title = locations[i].title;
+
+ }
+}
+
+
+
+
+
 
 
       // for (var i = 0; i < locations.length; i++) {
@@ -113,58 +140,40 @@ locations.forEach( (element) =>{
       //     break;
       //   }
       // }
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-
-
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
-
-  // The following group uses the location array to create an array of markers on initialize.
-  for (var i = 0; i < locations.length; i++) {
-    // Get the position from the location array.
-    var position = locations[i].location;
-    console.log(position);
-    var title = locations[i].title;
 //check usersposition
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     var pos = {
+//       lat: position.coords.latitude,
+//       lng: position.coords.longitude
+//     };
  
 
-   for (var i = 0; i < locations.length; i++) {
-     //lat and lng can we get from api
-    var latlng = {lat: locations[i][0],  lng: locations[i][1]};
-    //console.log(latlng);
-    var questionMarker = './img/checkpoint.png';
-    var marker = new google.maps.Marker({
-      position: latlng,
-      title: title,
-      animation: google.maps.Animation.DROP,
-      id: i,
-      map: map,
-      icon: questionMarker
-    });
-  }
-    // Push the marker to our array of markers.
-    markers.push(marker);
-    console.log(markers.location);
+//   //  for (var i = 0; i < locations.length; i++) {
+//   //    //lat and lng can we get from api
+//   //   var latlng = {lat: locations[i][0],  lng: locations[i][1]};
+//   //   //console.log(latlng);
+//   //   var questionMarker = './img/checkpoint.png';
+//   //   var marker = new google.maps.Marker({
+//   //     position: latlng,
+//   //     title: title,
+//   //     animation: google.maps.Animation.DROP,
+//   //     id: i,
+//   //     map: map,
+//   //     icon: questionMarker
+//   //   });
+//   // }
+//     // Push the marker to our array of markers.
+//     markers.push(marker);
+//     console.log(markers.location);
     
     
 
-    });
-    // document.getElementById('show-listings').addEventListener('click', showListings);
-    // document.getElementById('hide-listings').addEventListener('click', hideListings);
-  }
- }
-}
+//     });
+//     // document.getElementById('show-listings').addEventListener('click', showListings);
+//     // document.getElementById('hide-listings').addEventListener('click', hideListings);
+//   }
 
 // This function will loop through the markers array and display them all.
 // function showListings() {
