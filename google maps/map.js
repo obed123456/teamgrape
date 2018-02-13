@@ -59,13 +59,13 @@ locations.forEach( (element) =>{
         infoWindow.open(map);
         map.setCenter(pos);
 
-        //var markerobjects = [];
+        var markerobjects = [];
       //foreach loop will check in which marker and convert into object. 
       //its the same array as location but with objects in it. 
       //console.log(locations);
       locations.forEach( (element) =>{
         var latlng = {lat: element[0], lng: element[1]};        
-        //markerobjects.push(latlng);        
+        markerobjects.push(latlng);        
         n = arePointsNear(pos, latlng, 0.02); 
         
 
@@ -88,14 +88,15 @@ locations.forEach( (element) =>{
         if (n === true) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
           var currentMarker = latlng;
-          console.log(currentMarker);
-          // console.log(Number(latlng.lat));
-          
-          var match = locations.indexOf(currentMarker);   
+          var match = markerobjects.indexOf(currentMarker);
+          console.log(match);
+
+
+          //var match = locations.indexOf(currentMarker);   
           console.log(match);
           $('#\\#myModal').modal('show');
-          //var splicedMarker = locations.splice(match, 1);     
-          //console.log(locations); 
+          //locations.splice(match, 1);     
+          console.log(locations); 
           
        } else {
           //console.log('Your position doesnt match');
