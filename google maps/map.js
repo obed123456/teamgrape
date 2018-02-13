@@ -35,7 +35,7 @@ function initMap() {
 [59.3123, 18.1079]   
 ];
 locations.forEach( (element) =>{
-  console.log({lat: element[0], lng: element[1]});
+  //console.log({lat: element[0], lng: element[1]});
 });
 
   infoWindow = new google.maps.InfoWindow;
@@ -59,38 +59,46 @@ locations.forEach( (element) =>{
         infoWindow.open(map);
         map.setCenter(pos);
 
-        var markerobjects = [];
+        //var markerobjects = [];
       //foreach loop will check in which marker and convert into object. 
       //its the same array as location but with objects in it. 
+      //console.log(locations);
       locations.forEach( (element) =>{
         var latlng = {lat: element[0], lng: element[1]};        
-        markerobjects.push(latlng);
+        //markerobjects.push(latlng);        
+        n = arePointsNear(pos, latlng, 0.02); 
         
-        n = arePointsNear(pos, latlng, 0.02);        
+
+        //for (var i = 0; i < locations.length; i++) {
+          //This will check how many markers are there in location array
+          //latlng = {lat: locations[i][0],  lng: locations[i][1]};
+
+         var questionMarker = './img/checkpoint.png';
+         var marker = new google.maps.Marker({
+           position: latlng,
+           title: title,
+           animation: google.maps.Animation.DROP,
+           id: i,
+           map: map,
+           icon: questionMarker
+         });
+
+       //}
+
         if (n === true) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
-
-          var match = markerobjects.indexOf(latlng);   
-          $('#\\#myModal').modal('show');
-          var splicedMarker = locations.splice(match, 1);      
+          var currentMarker = latlng;
+          console.log(currentMarker);
+          // console.log(Number(latlng.lat));
           
-          for (var i = 0; i < locations.length; i++) {
-            //This will check how many markers are there in location array
-           var latlng = {lat: locations[i][0],  lng: locations[i][1]};
-
-           var questionMarker = './img/checkpoint.png';
-           var marker = new google.maps.Marker({
-             position: latlng,
-             title: title,
-             animation: google.maps.Animation.DROP,
-             id: i,
-             map: map,
-             icon: questionMarker
-           });
-
-         }
-        } else {
-          console.log('Your position doesnt match');
+          var match = locations.indexOf(currentMarker);   
+          console.log(match);
+          $('#\\#myModal').modal('show');
+          //var splicedMarker = locations.splice(match, 1);     
+          //console.log(locations); 
+          
+       } else {
+          //console.log('Your position doesnt match');
           // break;
         }
       });
@@ -98,7 +106,6 @@ locations.forEach( (element) =>{
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-
 
   } else {
     // Browser doesn't support Geolocation
