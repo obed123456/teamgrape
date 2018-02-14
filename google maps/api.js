@@ -593,6 +593,22 @@ questions = {
 }
 ]
 }
+function getPost() {
+  fetch('')
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach(function(post){
+      output += 
+      <div>
+        <h3>${}</h3>
+        <p>${}</p>
+      </div>
+    });
+  });
+}
+
+
+
 var allAnswer;
 var allAnswers = [];
 var iRandom = Math.floor((Math.random() * 49) + 1);
