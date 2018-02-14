@@ -53,8 +53,8 @@ locations.forEach( (element) =>{
       };
 
         infoWindow.setPosition(pos);
-        infoWindow.setContent('<img src="' + 'img/icon1.png' +  '"/>');
-        infoWindow.open(map);
+        //infoWindow.setContent('<img src="' + 'img/icon1.png' +  '"/>');
+        //infoWindow.open(map);
         map.setCenter(pos);
 
         var markerobjects = [];
@@ -79,6 +79,16 @@ locations.forEach( (element) =>{
            id: i,
            map: map,
            icon: questionMarker
+         });
+
+         var userIcon = './img/icon1.png';
+         var marker = new google.maps.Marker({
+           position: pos,
+           title: title,
+           animation: google.maps.Animation.DROP,
+           id: i,
+           map: map,
+           icon: userIcon
          });
 
        //}
