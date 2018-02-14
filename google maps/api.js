@@ -599,11 +599,11 @@ function getPost() {
   .then((res) => res.json())
   .then((data) => {
     data.forEach(function(post){
-      output += 
+      output += `
       <div>
-        <h3>${}</h3>
-        <p>${}</p>
-      </div>
+        <h3>${post}</h3>
+        <p>${post}</p>
+      </div>`;
     });
   });
 }
