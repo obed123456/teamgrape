@@ -11,7 +11,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
   });
 
   //Insert new markers in db
-  router.post("/marker",function(req,res){
+  router.post("/markers",function(req,res){
     var query = "INSERT INTO ??(??,??) VALUES (?,?)";
     var table = ["latlng","marker_lat","marker_lng",req.body.lat,req.body.lng];
     query = mysql.format(query,table);
@@ -26,11 +26,23 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 
 
 //get all markers? 
+
+router.get("/getmarkers",function(req,res){
+    var query = "SELECT * FROM ??";
+    var table = ["latlng"];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+        }
+    });
+  });
+
 //get one marker by id from databas
 
-
-
-router.get("/getmarkers/:user_id",function(req,res){
+router.get("/getmarkers/:user_id", function(req,res){
   var query = "SELECT * FROM ?? WHERE ??=?";
   var table = ["latlng","id",req.params.user_id];
   query = mysql.format(query,table);

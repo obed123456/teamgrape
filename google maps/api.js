@@ -594,19 +594,19 @@ questions = {
 }
 ]
 }
-function getPost() {
-  fetch('')
-  .then((res) => res.json())
-  .then((data) => {
-    data.forEach(function(post){
-      output += 
-      <div>
-        <h3>${}</h3>
-        <p>${}</p>
-      </div>
-    });
-  });
-}
+// function getPost() {
+//   fetch('')
+//   .then((res) => res.json())
+//   .then((data) => {
+//     data.forEach(function(post){
+//       output += 
+//       <div>
+//         <h3>${}</h3>
+//         <p>${}</p>
+//       </div>
+//     });
+//   });
+// }
 
 
 

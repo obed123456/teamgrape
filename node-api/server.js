@@ -6,6 +6,7 @@ var rest = require("./REST.js");
 var app  = express();
 
 //this will allow access to all website
+//Its not secure way to do it. Use only in dev-inviroment.
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -19,7 +20,7 @@ function REST(){
     self.connectMysql();
 };
 
-
+//MySQL connection
 
 REST.prototype.connectMysql = function() {
     var self = this;
@@ -50,12 +51,14 @@ REST.prototype.configureExpress = function(connection) {
       self.startServer();
 }
 
+//Start server at port 3000
 REST.prototype.startServer = function() {
       app.listen(3000,function(){
           console.log("All right ! I am alive at Port 3000.");
       });
-}
+} 
 
+//Error handlar incase mysql is not up and running.
 REST.prototype.stop = function(err) {
     console.log("ISSUE WITH MYSQL n" + err);
     process.exit(1);
