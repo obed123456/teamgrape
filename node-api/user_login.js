@@ -10,7 +10,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       res.json({"Message" : "Connected with api!"});
   });
 
-  router.post("/userss",function(req,res){
+  router.post("/users",function(req,res){
     var query = "INSERT INTO ??(??,??,??) VALUES (?,?,?)";
     var table = ["users","user_name","email","pwd",req.body.user_name,req.body.email,req.body.pwd];
     query = mysql.format(query,table);
