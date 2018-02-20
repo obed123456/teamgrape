@@ -1,26 +1,24 @@
-      html,
-      body {
-        font-family: Arial, sans-serif;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+html {
+    height: 100%;
+}
 
-      .container {
-        height: 100%;
-        position: relative;
-      }
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+	background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #5fa9fd, #5fa9fd );  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top,#5fa9fd, #5fa9fd ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
-      input {
-        font-size: 12px;
-      }
 
-      h1 {
-        color: #525454;
-        font-size: 22px;
-        margin: 0 0 10px 0;
-        text-align: center;
-      }
+#map {
+    height: 91.3%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
       #hide-listings,
       #show-listings {
@@ -30,9 +28,10 @@
       #map {
         bottom:0px;
         height: 100%;
-        left: 362px;
-        position: absolute;
+        left: 0px;
+        position: relative;
         right: 0px;
+		width:100%;
       }
 
       .options-box {
@@ -129,7 +128,6 @@ h4 {
     -webkit-tap-highlight-color: transparent;
 	outline: none;
 }
-
 .modal-content {
   position: relative;
 background: #000046;  /* fallback for old browsers */

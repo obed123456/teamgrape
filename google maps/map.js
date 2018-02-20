@@ -18,9 +18,7 @@ function initMap() {
     },
     zoom: 18,
     mapTypeControl: false,
-    styles:[{"elementType":"geometry","stylers":[{"color":"#ebe3cd"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#523735"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f1e6"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#c9b2a6"}]},{"featureType":"administrative.land_parcel","elementType":"geometry.stroke","stylers":[{"color":"#dcd2be"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ae9e90"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#93817c"}]},{"featureType":"poi.business","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#a5b076"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#447530"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#f5f1e6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#fdfcf8"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#f8c967"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#e9bc62"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#e98d58"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#db8555"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#806b63"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"transit.line","elementType":"labels.text.fill","stylers":[{"color":"#8f7d77"}]},{"featureType":"transit.line","elementType":"labels.text.stroke","stylers":[{"color":"#ebe3cd"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#b9d3c2"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#92998d"}]
-    }
-    ]
+    styles:[{"featureType":"all","elementType":"all","stylers":[{"saturation":"32"},{"lightness":"-3"},{"visibility":"on"},{"weight":"1.18"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"saturation":"-70"},{"lightness":"14"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"saturation":"100"},{"lightness":"-14"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"},{"lightness":"12"}]}]
   });
 
 
@@ -59,11 +57,11 @@ infoWindow = new google.maps.InfoWindow;
       //its the same array as location but with objects in it. 
       //console.log(locations);
       markers.forEach( (element) =>{
-        var title = ""+ element.id;
-        var latlng = {lat: Number(element.marker_lat), lng: Number(element.marker_lng)};        
+        var title = "" + element.id;
+        var latlng = {lat: Number(element.marker_lat), lng: Number(element.marker_lng)};       
         markerobjects.push(latlng);        
         n = arePointsNear(pos, latlng, 0.02); 
-        console.log(latlng);
+        console.log(n);
         
 
           //This will check how many markers are there in location array
@@ -73,24 +71,25 @@ infoWindow = new google.maps.InfoWindow;
            position: latlng,
            title: title,
            animation: google.maps.Animation.DROP,
-           id: i,
            map: map,
            icon: questionMarker
          });
 
 
-        if (n === true) { 
+        if (n) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
           var currentMarker = latlng;
           var match = markerobjects.indexOf(currentMarker);
           console.log(match);
 
-
           //var match = locations.indexOf(currentMarker);   
           console.log(match);
-          $('#\\#myModal').modal('show');
-          //locations.splice(match, 1);     
-          //console.log(locations); 
+          $('#\\#myModal').modal('show'); 
+          //if false answer
+          //else correct answer 
+          //add(PUT +1) in count in match db 
+          //need to put settimeout in whole map init() function. 
+          //
           
        } else {
           //console.log('Your position doesnt match');

@@ -10,6 +10,22 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       res.json({"Message" : "Connected with api!"});
   });
 
+//Adding users in databas
+//POST request
+router.post("/users",function(req,res){
+    var query = "INSERT INTO ??(??,??,??) VALUES (?,?,?)";
+    var table = ["users","user_name","email","pwd",req.body.user_name,req.body.email,req.body.pwd];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "User added in mysql!"});
+        }
+    });
+});
+
+
   //Insert new markers in db
   router.post("/markers",function(req,res){
     var query = "INSERT INTO ??(??,??) VALUES (?,?)";
@@ -87,6 +103,12 @@ router.delete("/deletemarker/:id",function(req,res){
       }
   });
 });
+
+
+
+
+
+
 }
 
 

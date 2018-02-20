@@ -589,11 +589,11 @@ questions = {
 "Charlie Sheen",
 "Ramon Sheen",
 "Emilio Estevez"
-
 ]
 }
 ]
 }
+<<<<<<< HEAD
 // function getPost() {
 //   fetch('')
 //   .then((res) => res.json())
@@ -607,6 +607,21 @@ questions = {
 //     });
 //   });
 // }
+=======
+function getPost() {
+  fetch('')
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach(function(post){
+      output += `
+      <div>
+        <h3>${post}</h3>
+        <p>${post}</p>
+      </div>`;
+    });
+  });
+}
+>>>>>>> 5eaa231598940f9dc761219243e262a3dd8232f6
 
 
 
