@@ -22,6 +22,7 @@
       <span></span>
       
       <ul id="menu">
+        <h3 id="username" style='color: black'></h3>
 	    <a href="startpage.html"><li class="activemenu">Home</li></a>
         <a href="leaderboard.html"><li>Leaderboard</li></a>
         <a href="#" role="button" data-toggle="modal" data-target="#joinTeam"><li>Join a Team</li></a>
@@ -61,18 +62,18 @@
 
                   <form>
                     <div class="form-group">
-                      <div class="input-group">
+                      <!-- <div class="input-group">
                       <input type="text" class="white-border col-lg-4 offset-lg-4 form-control" id="teamName" placeholder="Create team">
                         <div class="input-group-append">
                           <button class="btn btn-success1" id="myBtn" type="submit">Create</button>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   </form>
                   <div class="text-center mb-1" id="emptyField"></div><br>
                 </div>
                 <br>
-                <button id="joinMatch"class="btn btn-success1 mx-auto d-block mb-5" type="button">Join Team</button>
+                <button id="joinMatch"class="btn btn-success1 mx-auto d-block mb-5" type="button">Start Match</button>
             </div>
         </div>
     </div>
@@ -98,10 +99,15 @@
       </div>
     <div class="container-fluid" id="startPageBottom"></div>
 
-    <script>
-    document.getElementById('joinMatch').addEventListener('click', callback);
-    
 
+    <script>
+
+  var currentUser = window.location.hash.substr(1);
+  document.getElementById("username").innerHTML = 'User: ' + currentUser;
+  
+  document.getElementById('').addEventListener('click',{
+
+  });
 
 
     </script>

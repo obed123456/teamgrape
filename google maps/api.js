@@ -593,21 +593,6 @@ questions = {
 }
 ]
 }
-<<<<<<< HEAD
-// function getPost() {
-//   fetch('')
-//   .then((res) => res.json())
-//   .then((data) => {
-//     data.forEach(function(post){
-//       output += 
-//       <div>
-//         <h3>${}</h3>
-//         <p>${}</p>
-//       </div>
-//     });
-//   });
-// }
-=======
 function getPost() {
   fetch('')
   .then((res) => res.json())
@@ -621,7 +606,6 @@ function getPost() {
     });
   });
 }
->>>>>>> 5eaa231598940f9dc761219243e262a3dd8232f6
 
 
 
