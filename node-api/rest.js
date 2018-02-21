@@ -119,9 +119,9 @@ router.delete("/deletemarker/:id",function(req,res){
 
 //Start match 
 
-router.post("/startmatch/:user_name", function(req,res){
-    var query = "INSERT INTO ??(??) VALUES (?)";
-    var table = ["match","uname",req.params.user_name];
+router.post("/startmatch/:user_name/:match_code", function(req,res){
+    var query = "INSERT INTO ??(??,??) VALUES (?,?)";
+    var table = ["match","uname","matchCode",req.params.user_name, req.params.match_code];
     query = mysql.format(query,table);
     connection.query(query,function(err,rows){
         if(err) {
@@ -148,12 +148,26 @@ router.post("/startmatch/:user_name", function(req,res){
     });
   });
 
-
   //get one match id by username
 
-  router.get("/getmatchid/:user_name", function(req,res){
-    var query = "SELECT * FROM ?? WHERE ??=?";
-    var table = ["match","uname",req.params.user_name];
+ router.get("/getmatchid/:user_name", function(req,res){
+  var query = "SELECT * FROM ?? WHERE ??=?";
+  var table = ["match","uname",req.params.user_name];
+  query = mysql.format(query,table);
+  connection.query(query,function(err,rows){
+      if(err) {
+          res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+      } else {
+          res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+      }
+  });
+});
+
+  //get all matches 
+
+  router.get("/getallmatches",function(req,res){
+    var query = "SELECT * FROM ??";
+    var table = ["match"];
     query = mysql.format(query,table);
     connection.query(query,function(err,rows){
         if(err) {
@@ -163,6 +177,8 @@ router.post("/startmatch/:user_name", function(req,res){
         }
     });
   });
+
+
 
 
 }

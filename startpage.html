@@ -100,17 +100,45 @@
     <div class="container-fluid" id="startPageBottom"></div>
 
 
-    <script>
-
+<script>
+  //save username from url
   var currentUser = window.location.hash.substr(1);
+
+  //create random code.
+
+  function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+  var matchcode = makeid();
+
+  //this will add user name in menu
   document.getElementById("username").innerHTML = 'User: ' + currentUser;
+  //this function will chnage url for google map page with user id and current code 
+  //new match row will be created in db  along with uniq match code.
+  document.getElementById("joinMatch").addEventListener('click', addPost);
+  function addPost(e){
+     e.preventDefault();
+   
+    window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
   
-  document.getElementById('').addEventListener('click',{
 
-  });
+     fetch('http://localhost:3000/api/startmatch/' + currentUser + '/' + matchcode, {
+       method:'POST',
+       headers: {
+         'Accept': 'application/json, text/plain, */*',
+         'Content-type':'application/json'
+       },
+       body:JSON.stringify({user_name: currentUser})
+     })
+     .then((res) => res.json())
+     .then((data) => console.log(data))     
+  }
 
-
-    </script>
+</script>
 
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqwpwKirHNR8hapcq0pCHGPq94qjDKBhU&callback=initMap"></script>
