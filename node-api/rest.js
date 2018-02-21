@@ -25,6 +25,19 @@ router.post("/users",function(req,res){
     });
 });
 
+//get one user
+router.get("/getusers/:username",function(req,res){
+    var query = "SELECT * FROM ?? WHERE ??=?";
+    var table = ["users", "user_name", req.params.username];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+        }
+    });
+  });
 
   //Insert new markers in db
   router.post("/markers",function(req,res){
@@ -104,9 +117,36 @@ router.delete("/deletemarker/:id",function(req,res){
   });
 });
 
+//Start match 
+
+router.post("/startmatch/:user_name", function(req,res){
+    var query = "INSERT INTO ??(??) VALUES (?)";
+    var table = ["match","uname",req.params.user_name];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+        }
+    });
+  });
 
 
+  //update score in a match
 
+  router.put("/updatematch",function(req,res){
+    var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    var table = ["match","correct_answer",req.body.answer, "ID",req.body.id];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "match score of ID:  "+ req.body.id + " updated."});
+        }
+    });
+  });
 
 
 }

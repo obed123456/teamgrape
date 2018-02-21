@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +12,12 @@
   <title>Team Grape</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/stylesheet.css">
 </head>
 <body>
   <div class="col-lg-12 col-xs-12 container-fluid v-height img">
     <div class="col-lg-6 col-md-6 mp">
-      <img class="col-lg-6 img-fluid center mx-auto d-block" alt="Logotyp" src="IMG/logo.png"/>
+      <img class="col-lg-6 img-fluid center mx-auto d-block" alt="Logotyp" src="../IMG/logo.png"/>
       <div class="text-center">
       <h4>The Amazing Game</h4>
       <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout">About &amp; Rules | </a>
@@ -24,14 +30,14 @@
           <h4>Login</h4>
           <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="vh-height">
-            <form>
+            <form action="login.inc.php" method="POST">
               <div class="col-lg-12 form-group">
-                <input type="text" class="form-control" placeholder="Username" id="username" required>
+                <input type="text" name="uid" class="form-control" placeholder="Username" id="username" required>
               </div>
               <div class="col-lg-12 col-sm-12 col-xs-12 form-group">
-                <input type="password" class="form-control" placeholder="Password" id="password" required>
+                <input type="password" name="pwd"  class="form-control" placeholder="Password" id="password" required>
               </div>
-			   <button type="submit" class="btn btn-success1" onClick="check()">Let's play!</button>
+			        <button type="submit" name="submit" class="btn btn-success1">Let's play!</button>
               </form>
               </div>
             </div>
@@ -83,7 +89,7 @@
               <p>Please enter your registration details below</p>
             </div>
           </div>
-          <form action="index.inc.php" method="POST">
+       <form action="index.inc.php" method="POST">
           <div class="col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="uName">Username:</label>
@@ -118,12 +124,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 <script src="JS/jquery-3.2.1.js"></script>
-<script>
-$(function() {
-    $('.multiselect-ui').multiselect({
-        includeSelectAllOption: true
-    });
-});
-</script>
 </body>
 </html>

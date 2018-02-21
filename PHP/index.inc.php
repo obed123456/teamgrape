@@ -2,14 +2,9 @@
 
 if (isset($_POST['submit'])) {
 
-    $dbServername = "localhost";
- 	$dbUsername = "root";
- 	$dbPassword = "";
- 	$dbName = "loginsystem";
+include_once 'dbh.inc.php';
 
-	$conn = mysqli_connect( $dbServername, $dbUsername, $dbPassword, $dbName);
-
-    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+	$uid = mysqli_real_escape_string($conn, $_POST['uid']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
