@@ -100,14 +100,42 @@
     <div class="container-fluid" id="startPageBottom"></div>
 
 
-    <script>
+<script>
 
   var currentUser = window.location.hash.substr(1);
   document.getElementById("username").innerHTML = 'User: ' + currentUser;
   
+  document.getElementById("joinMatch").addEventListener('click', addPost);
+function addPost(e){
+     e.preventDefault();
 
+  getPosts();
+   
+    window.location.href = 'googlemaps/googlemap.html?user=' + currentUser;
+  
 
-    </script>
+     fetch('http://localhost:3000/api/startmatch/' + currentUser, {
+       method:'POST',
+       headers: {
+         'Accept': 'application/json, text/plain, */*',
+         'Content-type':'application/json'
+       },
+       body:JSON.stringify({user_name: currentUser})
+     })
+     .then((res) => res.json())
+     .then((data) => console.log(data))
+   
+   }
+
+function getPosts(){
+  fetch('http://localhost:3000/api/getmatchid/' + currentUser)
+  .then((res) => res.json())
+  .then(data => array = data)
+  .then(console.log)
+  .then(() => console.log([array.Users[0]]));
+}
+getPosts();
+ </script>
 
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqwpwKirHNR8hapcq0pCHGPq94qjDKBhU&callback=initMap"></script>
