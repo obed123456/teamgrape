@@ -119,9 +119,9 @@ router.delete("/deletemarker/:id",function(req,res){
 
 //Start match 
 
-router.post("/startmatch/:user_name/:match_code", function(req,res){
-    var query = "INSERT INTO ??(??,??) VALUES (?,?)";
-    var table = ["match","uname","matchCode",req.params.user_name, req.params.match_code];
+router.post("/startmatch/:user_name/:match_code/:start_time", function(req,res){
+    var query = "INSERT INTO ??(??,??,??) VALUES (?,?,?)";
+    var table = ["match","uname","matchCode", "startTime",req.params.user_name, req.params.match_code, req.params.start_time];
     query = mysql.format(query,table);
     connection.query(query,function(err,rows){
         if(err) {

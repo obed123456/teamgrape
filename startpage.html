@@ -115,6 +115,14 @@
   }
   var matchcode = makeid();
 
+//Start time of match when it starts
+  function myFunction() {
+    var d = new Date();
+    n = d.getTime();    
+    return n;
+}
+var starttime = myFunction();
+
   //this will add user name in menu
   document.getElementById("username").innerHTML = 'User: ' + currentUser;
   //this function will chnage url for google map page with user id and current code 
@@ -126,7 +134,7 @@
     window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
   
 
-     fetch('http://localhost:3000/api/startmatch/' + currentUser + '/' + matchcode, {
+     fetch('http://localhost:3000/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
        method:'POST',
        headers: {
          'Accept': 'application/json, text/plain, */*',
