@@ -1,127 +1,106 @@
-var width = 400,
-  height = 400,
-  timePassed = 0,
-  timeLimit = 15;
 
-var fields = [{
-  value: timeLimit,
-  size: timeLimit,
-  update: function() {
-    return timePassed = timePassed + 1;
+// Tryck på felsvar, adda css class som gör att den blir röd
+jQuery('.button1').click(function() {
+    if (!jQuery(this).hasClass('wrong-answer')) {
+    jQuery('.button1').removeClass('wrong-answer');
+    jQuery(this).toggleClass('wrong-answer');
   }
-}];
-
-var nilArc = d3.svg.arc()
-  .innerRadius(width / 3 - 133)
-  .outerRadius(width / 3 - 133)
-  .startAngle(0)
-  .endAngle(2 * Math.PI);
-
-var arc = d3.svg.arc()
-  .innerRadius(width / 3 - 55)
-  .outerRadius(width / 3 - 25)
-  .startAngle(0)
-  .endAngle(function(d) {
-    return ((d.value / d.size) * 2 * Math.PI);
-  });
-
-var svg = d3.select(".countdown").append("svg")
-  .attr("width", width)
-  .attr("height", height);
-
-var field = svg.selectAll(".field")
-  .data(fields)
-  .enter().append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-  .attr("class", "field");
-
-var back = field.append("path")
-  .attr("class", "path path--background")
-  .attr("d", arc);
-
-var path = field.append("path")
-  .attr("class", "path path--foreground");
-
-var label = field.append("text")
-  .attr("class", "label")
-  .attr("dy", ".35em");
-
-(function update() {
-
-  field
-    .each(function(d) {
-      d.previous = d.value, d.value = d.update(timePassed);
-    });
-
-  path.transition()
-    .ease("elastic")
-    .duration(500)
-    .attrTween("d", arcTween);
-
-  if ((timeLimit - timePassed) <= 5)
-    pulseText();
-  else
-    label
-    .text(function(d) {
-      return d.size - d.value;
-    });
-
-  if (timePassed <= timeLimit)
-    setTimeout(update, 1000 - (timePassed % 1000));
-  else
-    destroyTimer();
-
-})();
-
-function pulseText() {
-  back.classed("pulse", true);
-  label.classed("pulse", true);
-
-  if ((timeLimit - timePassed) >= 0) {
-    label.style("font-size", "120px")
-      .attr("transform", "translate(0," + +4 + ")")
-      .text(function(d) {
-        return d.size - d.value;
-      });
+});
+// Tryck på rättsvar, adda css class som gör att den blir grön
+      jQuery('.button12').click(function() {
+     if (!jQuery(this).hasClass('right-answer')) {
+    jQuery('.button12').removeClass('right-answer');
+    jQuery(this).toggleClass('right-answer');
   }
+});
 
-  label.transition()
-    .ease("elastic")
-    .duration(900)
-    .style("font-size", "90px")
-    .attr("transform", "translate(0," + -10 + ")");
+
+// Gör att du inte kan trycka i alla frågor samtidigt.
+function DisableButtons()
+{    $(".button1").attr("disabled", true);
+	$(".button12").attr("disabled", true);
+}
+// När du har svarat och trycker vill svara på fråga, tabort grön/röd färg så dom blir som nya
+document.getElementById("myButton").addEventListener("click", function(){
+ $(".button1").attr("disabled", false);
+	$(".button12").attr("disabled", false);
+	  jQuery('.button12').removeClass('right-answer');
+	    jQuery('.button1').removeClass('wrong-answer');
+});
+
+
+// När man trycker på rätt svar, visa correct, samt göm modalbox
+// När man trycker på Fel svar, visa Incorrect, samt göm modalbox
+function correct() {
+    document.getElementById("test1").innerHTML = "Correct";
+	 setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
 }
 
-function destroyTimer() {
-  label.transition()
-    .ease("back")
-    .duration(700)
-    .style("opacity", "0")
-    .style("font-size", "5")
-    .attr("transform", "translate(0," + -40 + ")")
-    .each("end", function() {
-      field.selectAll("text").remove()
-    });
-
-  path.transition()
-    .ease("back")
-    .duration(700)
-    .attr("d", nilArc);
-
-  back.transition()
-    .ease("back")
-    .duration(700)
-    .attr("d", nilArc)
-    .each("end", function() {
-      field.selectAll("path").remove()
-    });
+function incorrect1() {
+    document.getElementById("test").innerHTML = "Incorrect";
+	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
+	
+}
+function incorrect2() {
+    document.getElementById("test2").innerHTML = "Incorrect";
+	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
+	
+}
+function incorrect3() {
+    document.getElementById("test3").innerHTML = "Incorrect";
+	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
+	
 }
 
-function arcTween(b) {
-  var i = d3.interpolate({
-    value: b.previous
-  }, b);
-  return function(t) {
-    return arc(i(t));
-  };
+
+// När man trycker på rätt svar, så räknar den det.
+$(".startclock").click(function(){
+  var counter = 16;
+  setInterval(function() {
+    counter--;
+    if (counter >= 0) {
+      span = document.getElementById("count");
+      span.innerHTML = counter;
+    }
+    if (counter === 0) {
+        clearInterval(counter);
+    }
+  }, 1000);   
+});
+// När man trycker på rätt svar, så räknar den det.
+count = 0
+counter= function(){
+var counter =
+document.getElementById("counter");
+counter.innerHTML = ++ count;
+  }
+  
+  // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
+  var fewSeconds = 16;
+$('#myButton').click(function(){
+    var btn = $(this);
+    btn.prop('disabled', true);
+      $('button.btn-primary.knapp').text('Checking answer...');
+    setTimeout(function(){
+        btn.prop('disabled', false);
+		  $('button.btn-primary.knapp').text('Answer Question');
+    }, fewSeconds*1000);
+});
+    // Reggar hur många gånger man tryckt på Answer question, visar det som "you reached checkpoint 1"
+  var checkpoints = 0;
+$('#myButton').click(function(){
+ checkpoints += 1;
+        document.getElementById("checkpoints").innerHTML = checkpoints;
+});
+
+var winning = new Audio();
+winning.src = "winning.mp3";
+function winningsound() {
+    winning.play();
+}
+
+var losing = new Audio();
+losing.src = "losing.mp3";
+function losingsound() {
+    losing.play();
 }
