@@ -609,11 +609,14 @@ function getPost() {
 
 
 
+
+document.getElementById("myButton").addEventListener("click", function(){
 var allAnswer;
 var allAnswers = [];
 var iRandom = Math.floor((Math.random() * 49) + 1);
+
 for (i in questions.results) {
-  x = "<h2>" + questions.results[iRandom].question + "</h2>";
+  x = "<h1>" + questions.results[iRandom].question + "</h1>";
   y = "<p>" + questions.results[iRandom].correct_answer + "</p>";
   n = "<p>" + questions.results[iRandom].incorrect_answers[0] + "</p>";
   h = "<p>" + questions.results[iRandom].incorrect_answers[1] + "</p>";
@@ -623,10 +626,11 @@ for (i in questions.results) {
  $("#scramble-buttons").html($("#scramble-buttons").children().sort(function() { return 0.5 - Math.random() }));
 });
   document.getElementById("demo").innerHTML = x;
-  document.getElementById("test").innerHTML = answers[0];
+  document.getElementById("test").innerHTML = answers[0]
   document.getElementById("test1").innerHTML = answers[1];
   document.getElementById("test2").innerHTML = answers[2];
   document.getElementById("test3").innerHTML = answers[3];
 
 
 }
+});
