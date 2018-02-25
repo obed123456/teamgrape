@@ -21,8 +21,7 @@ function initMap() {
     mapTypeControl: false,
     styles:[{"featureType":"all","elementType":"all","stylers":[{"saturation":"32"},{"lightness":"-3"},{"visibility":"on"},{"weight":"1.18"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"saturation":"-70"},{"lightness":"14"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"saturation":"100"},{"lightness":"-14"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"},{"lightness":"12"}]}]
   });
-
-
+//Get all markers from db 
 const getAllMarkers = 'http://localhost:3000/api/getmarkers/';
 fetch(getAllMarkers)
 .then(function(response) {
@@ -31,7 +30,7 @@ fetch(getAllMarkers)
   .then(function(json) {
       var markers = json.Users;
   
-// TODO: Add google stuff here
+// Add google stuff here
 infoWindow = new google.maps.InfoWindow;
   
  var userlocation = null;
@@ -53,17 +52,14 @@ infoWindow = new google.maps.InfoWindow;
         infoWindow.open(map);
         map.setCenter(pos);
 
-        var markerobjects = [];
+      var markerobjects = [];
       //foreach loop will check in which marker and convert into object. 
       //its the same array as location but with objects in it. 
-      //console.log(locations);
-      markers.forEach( (element) =>{
+      markers.forEach( (element) => {
         var title = "" + element.id;
         var latlng = {lat: Number(element.marker_lat), lng: Number(element.marker_lng)};       
         markerobjects.push(latlng);        
-        n = arePointsNear(pos, latlng, 0.02); 
-        console.log(n);
-        
+        n = arePointsNear(pos, latlng, 0.02);      
 
           //This will check how many markers are there in location array
 
@@ -76,24 +72,29 @@ infoWindow = new google.maps.InfoWindow;
            icon: questionMarker
          });
 
+  
 
         if (n) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
           var currentMarker = latlng;
+          //Here we get position of the closed marker
           var match = markerobjects.indexOf(currentMarker);
-          console.log(match);
-
+          //takenMarkers.push(markerobjects[match]);
           //var match = locations.indexOf(currentMarker);   
-          console.log(match);
-          $('#\\#myModal').modal('show'); 
-          //if false answer
-          //else correct answer 
-          //add(PUT +1) in count in match db 
-          //need to put settimeout in whole map init() function. 
-          //
+          $(document).ready(function(){  
+            document.getElementById("myButton").style.background='#22db22';
+              $('button.btn-primary.knapp').text('Answer Question');
+            
+          
+          document.getElementById('myButton').onclick = function(){
+             $('#\\#myModal').modal('show');
+              setTimeout(function(){
+              $('#\\#myModal').modal('hide'); 
+              }, 99000);}	
+          });   
           
        } else {
-          //console.log('Your position doesnt match');
+         //console.log('Your position doesnt match');
           // break;
         }
       });
