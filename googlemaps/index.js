@@ -1,3 +1,54 @@
+var url = window.location; 
+//url with user name and matchcode
+var currentUrl = window.location.hash.substr(1);
+//matchcode from url
+var matchcode = currentUrl.substr((currentUrl.length)-5);
+//username from url 
+var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
+
+//this will just say that you won whenever we reload the page
+const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+fetch(getAllCorrectAnswer)
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+      var markers = json.Users[0].correct_answer;
+      if(markers >= 5 ){
+        alert("You won!");
+      }
+  });
+}
+});
+
+//get all correct answers. You get only one number
+function addCorrectAnswer() {
+const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+fetch(getAllCorrectAnswer)
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+      var markers = json.Users[0].correct_answer;   
+      if(!(markers >= 5)){
+        var url = 'http://localhost:3000/api/updatematch/'+ matchcode;
+$.ajax({
+  type: "PUT",
+  url: url,
+  data: JSON,
+});
+        //take them to state page
+      } else {
+//if correct answer this will add  +1 in db 
+     alert('You already won!');
+     //take them to stat page.
+  }      
+  });
+}
+});
+}
+
+//This will check how many makers
 
 // Tryck på felsvar, adda css class som gör att den blir röd
 jQuery('.button1').click(function() {
@@ -7,13 +58,13 @@ jQuery('.button1').click(function() {
   }
 });
 // Tryck på rättsvar, adda css class som gör att den blir grön
-      jQuery('.button12').click(function() {
-     if (!jQuery(this).hasClass('right-answer')) {
+    jQuery('.button12').click(function() {  
+    if (!jQuery(this).hasClass('right-answer')) {
     jQuery('.button12').removeClass('right-answer');
     jQuery(this).toggleClass('right-answer');
+    addCorrectAnswer(); //this function will add +1 in db if answer is correct
   }
 });
-
 
 // Gör att du inte kan trycka i alla frågor samtidigt.
 function DisableButtons()

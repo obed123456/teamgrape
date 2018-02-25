@@ -133,26 +133,28 @@ router.post("/startmatch/:user_name/:match_code/:start_time", function(req,res){
   });
 
 
-  //update score in a match
+  //update score with +1 in a match by code
 
-  router.put("/updatematch",function(req,res){
-    var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-    var table = ["match","correct_answer",req.body.answer, "ID",req.body.id];
+  router.put("/updatematch/:matchcode",function(req,res){
+    var query = "UPDATE ?? SET correct_answer = correct_answer + 1 WHERE ?? = ?";
+    var table = ["match", "matchCode", req.params.matchcode];
     query = mysql.format(query,table);
     connection.query(query,function(err,rows){
         if(err) {
             res.json({"Error" : true, "Message" : "Error executing MySQL query"});
         } else {
-            res.json({"Error" : false, "Message" : "match score of ID:  "+ req.body.id + " updated."});
+            res.json({"Error" : false, "Message" : "match score of ID:  "+ rows + " updated."});
         }
     });
   });
 
-  //get one match id by username
 
- router.get("/getmatchid/:user_name", function(req,res){
+
+  //get match detail by matchcode
+
+ router.get("/getmatchbycode/:matchcode2", function(req,res){
   var query = "SELECT * FROM ?? WHERE ??=?";
-  var table = ["match","uname",req.params.user_name];
+  var table = ["match","matchCode",req.params.matchcode2];
   query = mysql.format(query,table);
   connection.query(query,function(err,rows){
       if(err) {

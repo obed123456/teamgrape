@@ -9,6 +9,16 @@ function arePointsNear(checkPoint, centerPoint, km) {
   return Math.sqrt(dx * dx + dy * dy) <= km;
 };
 
+var url = window.location; 
+//url with user name and matchcode
+var currentUrl = window.location.hash.substr(1);
+//matchcode from url
+var matchcode = currentUrl.substr((currentUrl.length)-5);
+//username from url 
+var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
+
+
+
 function initMap() {
 
   // Constructor creates a new map - only center and zoom are required.
@@ -80,17 +90,17 @@ infoWindow = new google.maps.InfoWindow;
           var currentMarker = latlng;
           var match = markerobjects.indexOf(currentMarker);
           console.log(match);
-                        $(document).ready(function(){  
-	document.getElementById("myButton").style.background='#22db22';
-	  $('button.btn-primary.knapp').text('Answer Question');
+          $(document).ready(function(){  
+	        document.getElementById("myButton").style.background='#22db22';
+	        $('button.btn-primary.knapp').text('Answer Question');
 	
 
-document.getElementById('myButton').onclick = function(){
-   $('#\\#myModal').modal('show');
-    setTimeout(function(){
-    $('#\\#myModal').modal('hide'); 
-    }, 99000);}	
-});  
+          document.getElementById('myButton').onclick = function(){
+            $('#\\#myModal').modal('show');
+              setTimeout(function(){
+              $('#\\#myModal').modal('hide'); 
+              }, 99000);}	
+          });  
           
        } else {
           console.log('Your position doesnt match');
