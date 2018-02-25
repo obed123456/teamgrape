@@ -104,7 +104,7 @@ function incorrect3() {
 }
 
 
-// När man trycker på rätt svar, så räknar den det.
+// När man answer question räkna ner från 16..
 $(".startclock").click(function(){
   var counter = 16;
   setInterval(function() {
@@ -118,13 +118,15 @@ $(".startclock").click(function(){
     }
   }, 1000);   
 });
-// När man trycker på rätt svar, så räknar den det.
-count = 0
-counter= function(){
-var counter =
-document.getElementById("counter");
-counter.innerHTML = ++ count;
-  }
+ var clicks = 0;
+    function counter() {
+        clicks += 1;
+        document.getElementById("counter").innerHTML = clicks;
+        
+         if (clicks === 5) {
+        alert("You got every single question right GZ!")
+    }
+ }
   
   // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
   var fewSeconds = 16;

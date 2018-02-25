@@ -99,7 +99,7 @@ infoWindow = new google.maps.InfoWindow;
             $('#\\#myModal').modal('show');
               setTimeout(function(){
               $('#\\#myModal').modal('hide'); 
-              }, 99000);}	
+              }, 15000);}	
           });  
           
        } else {
