@@ -124,7 +124,10 @@ $(".startclock").click(function(){
         document.getElementById("counter").innerHTML = clicks;
         
          if (clicks === 5) {
-        alert("You got every single question right GZ!")
+        alert("You got every single question right GZ!");
+		 $('#\\#myModal').remove();
+		  $('button.btn-primary.knapp').remove();
+		  //Modal, du har klarat av spelet
     }
  }
   
