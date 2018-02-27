@@ -1,10 +1,15 @@
-var url = window.location; 
+var url;
+var currentUrl;
+var matchcode;
+var urlUserName;
+
+url = window.location; 
 //url with user name and matchcode
-var currentUrl = window.location.hash.substr(1);
+currentUrl = window.location.hash.substr(1);
 //matchcode from url
-var matchcode = currentUrl.substr((currentUrl.length)-5);
+matchcode = currentUrl.substr((currentUrl.length)-5);
 //username from url 
-var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
+urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 //this will just say that you won whenever we reload the page
 const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
@@ -16,6 +21,57 @@ fetch(getAllCorrectAnswer)
       var markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
         alert("You won!");
+
+        // Get the starttime from DB
+        const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+        fetch(getAllCorrectAnswer)
+        .then(function(response) {
+          if(response.ok) {
+            response.json()
+          .then(function(json) {
+            var startTime; 
+            startTime = json.Users[0].startTime; 
+  
+              
+              function totalMatchTime() {
+                var timeInMs;
+                var totalTimeInMs;
+                var hours;
+                var minutes;
+                var seconds;
+                var totalTime;
+
+                // Take the endtime and compare it to the starttime to get the total time for the game.
+                // Convert the total time in milliseconds to a better format (hours:minutes:seconds)
+                timeInMs = Date.now();
+                totalTimeInMs = timeInMs - startTime;
+                totalTimeInMs = Math.floor(totalTimeInMs / 1000);
+                hours = Math.floor(totalTimeInMs / 3600);
+                totalTimeInMs -= hours * 3600;
+                minutes = Math.floor(totalTimeInMs / 60);
+                totalTimeInMs -= minutes * 60;
+                seconds = parseInt(totalTimeInMs % 60, 10);
+                totalTime = (hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds));
+                
+                console.log(totalTime);
+                
+                // Put the converted format of totaltime in the DB
+                fetch('http://localhost:3000/api/updatematch/' + totalTime + '/' + matchcode, {
+                  method: 'PUT',  
+                  headers: new Headers({
+                    'Content-Type': 'application/json'
+                  })
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));
+              }
+              totalMatchTime();  
+  
+          })
+        }
+      })
+
+
       }
   });
 }

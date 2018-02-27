@@ -180,6 +180,19 @@ router.post("/startmatch/:user_name/:match_code/:start_time", function(req,res){
     });
   });
 
+  //put endtime 
+  router.put("/updatematch/:totaltime/:matchcode",function(req,res){
+    var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    var table = ["match", "totaltime", req.params.totaltime, "matchCode", req.params.matchcode];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "match score of ID:  "+ rows + " updated."});
+        }
+    });
+  });
 
 
 
