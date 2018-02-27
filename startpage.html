@@ -24,7 +24,7 @@
       <ul id="menu">
         <h3 id="username" style='color: black'></h3>
 	    <a href="startpage.html"><li class="activemenu">Home</li></a>
-        <a href="leaderboard.html"><li>Leaderboard</li></a>
+      <a><li id="leaderboard">Leaderboard</li></a>
         <a href="#" role="button" data-toggle="modal" data-target="#joinTeam"><li>Join a Team</li></a>
         <a href="#"><li>Settings</li></a>
         <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout"><li>Help</li></a>
@@ -122,6 +122,13 @@
     return n;
 }
 var starttime = myFunction();
+
+document.getElementById("leaderboard").addEventListener("click", leaderboard);
+
+function leaderboard() {
+  window.location.href = 'leaderboard.html?user=#' + currentUser;
+  
+}
 
   //this will add user name in menu
   document.getElementById("username").innerHTML = 'User: ' + currentUser;
