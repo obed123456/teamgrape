@@ -53,11 +53,9 @@ background: linear-gradient(to top,#0f59ff, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fir
 }
 
 
-.startPageBottom {
-  background-image: url("../IMG/map.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+#startPageBottom {
   height: 62vh;
+  width: 100%;
 }
 
 /*För att dölja create button när man klickar på menyn*/
@@ -169,3 +167,25 @@ hr {
     border-bottom-right-radius: 0;
 	border-color:white;
 }
+
+@media screen and (max-width: 480px) {
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 90%;
+	left:3%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+}
+

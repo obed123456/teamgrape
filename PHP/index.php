@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +12,12 @@
   <title>Team Grape</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/stylesheet.css">
 </head>
 <body>
   <div class="col-lg-12 col-xs-12 container-fluid v-height img">
     <div class="col-lg-6 col-md-6 mp">
-      <img class="col-lg-6 img-fluid center mx-auto d-block" alt="Logotyp" src="IMG/logo.png"/>
+      <img class="col-lg-6 img-fluid center mx-auto d-block" alt="Logotyp" src="../IMG/logo.png"/>
       <div class="text-center">
       <h4>The Amazing Game</h4>
       <a href="#" role="button" data-toggle="modal" data-target="#rulesAbout">About &amp; Rules | </a>
@@ -24,14 +30,14 @@
           <h4>Login</h4>
           <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="vh-height">
-            <form>
+            <form action="login.inc.php" method="POST">
               <div class="col-lg-12 form-group">
-                <input type="text" class="form-control" placeholder="Username" id="username" required>
+                <input type="text" name="uid" class="form-control" placeholder="Username" id="username" required>
               </div>
               <div class="col-lg-12 col-sm-12 col-xs-12 form-group">
-                <input type="password" class="form-control" placeholder="Password" id="password" required>
+                <input type="password" name="pwd"  class="form-control" placeholder="Password" id="password" required>
               </div>
-			   <button type="submit" class="btn btn-success1" onClick="check()">Let's play!</button>
+			        <button type="submit" name="submit" class="btn btn-success1">Let's play!</button>
               </form>
               </div>
             </div>
@@ -81,38 +87,31 @@
               <h3>The Amazing Game</h3>
               <h4>Registration</h4>
               <p>Please enter your registration details below</p>
-              <form>
             </div>
           </div>
-          <!-- <div class="col-sm-12 col-xs-12"> -->
-           <!-- <div class="form-group">
-              <label for="fName">First Name:</label>
-              <input type="text" class="form-control" placeholder="Enter First Name" id="fName" required>
-            </div>
-            <div class="form-group">
-              <label for="lname">Last Name:</label>
-              <input type="text" class="form-control" placeholder="Enter Last Name" id="lName" required>
-            </div> -->
-          <form>
+       <form action="index.inc.php" method="POST">
+          <div class="col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="uName">Username:</label>
-              <input type="text" class="form-control" placeholder="Enter Username" id="uName" required>
+              <input type="text" class="form-control" name="uid" placeholder="Enter Username" id="uName" required>
             </div>
             <div class="form-group">
               <label for="email">Email:</label>
-              <input type="email" class="form-control" placeholder="Enter Email" id="email" required>
+              <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" required>
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
-              <input type="password" class="form-control" placeholder="Enter Password" id="pwd" required>
+              <input type="password" class="form-control" name="pwd" placeholder="Enter Password" id="password" required>
             </div>
-            <div class="form-check">
+            
+            <!-- <div class="form-check">
               <input type="checkbox" class="form-check-input" id="termsAndCondition" required>
               <label class="form-check-label" for="termsAndCondition">I agree to the following <a href="#" role="button" data-toggle="modal" data-target="#exampleModalLong">terms and conditions</a></label>
-            </div>
-            <input type="submit" id="addPost" class="btn btn-default" value="submit">
-          </form>
-
+            </div> -->
+            <button type="submit" name="submit" class="btn btn-default">Submit</button>
+        </div>
+        </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -120,63 +119,10 @@
     </div>
   </div>
 </div>
-<script>
-    document.getElementById('addPost').addEventListener('click', addPost);
-
-    function addPost(e){
-      e.preventDefault();
-
-      let user_name = document.getElementById('uName').value;
-      let email = document.getElementById('email').value;      
-      let pwd = document.getElementById('pwd').value;
-
-      fetch('http://localhost:3000/api/users/', {
-        method:'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-type':'application/json'
-        },
-        body:JSON.stringify({
-          user_name:user_name, 
-          email:email, 
-          pwd:pwd
-        })
-      })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-    }
-
-
-    function addPost(e){
-      e.preventDefault();
-
-      let user_name = document.getElementById('uName').value;
-          
-
-
-      fetch('http://localhost:3000/api/getallusers/', {
-        method:'GET',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-type':'application/json'
-        },
-        body:JSON.stringify({
-          user_name:user_name, 
-        })
-      })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-    }
-
-</script>
-</body>
-</html>
-
 <script src="JS/script.js"></script>    
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 <script src="JS/jquery-3.2.1.js"></script>
-
-
-
+</body>
+</html>
