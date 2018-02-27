@@ -41,3 +41,7 @@ Release 2, vecka 9.
 - Write git commit -m "write comment"
 - Submit changes to Github. || git push --set-upstream origin "your_branch"
 - Try this if you are not connected to staging || git branch --set-upstream-to = origin / staging
+
+#Her
+obed.samuel@student.kyh.se
+Grape***8!
