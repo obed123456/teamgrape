@@ -168,7 +168,7 @@ router.post("/startmatch/:user_name/:match_code/:start_time", function(req,res){
   //get all matches 
 
   router.get("/getallmatches",function(req,res){
-    var query = "SELECT * FROM ??";
+    var query = "SELECT * FROM ?? ORDER BY CASE WHEN totaltime IS NULL THEN 1 WHEN totaltime ='' THEN 2 ELSE 3 END DESC, totaltime ASC";
     var table = ["match"];
     query = mysql.format(query,table);
     connection.query(query,function(err,rows){
