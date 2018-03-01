@@ -2,9 +2,8 @@
   "name": "node-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node Server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +12,8 @@
     "mysql": "*",
     "body-parser": "*",
     "MD5": "*"
-  }
+  },
+  "engines": {
+    "node": "6.11.2"
+  },
 }
