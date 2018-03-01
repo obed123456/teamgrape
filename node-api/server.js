@@ -26,11 +26,16 @@ REST.prototype.connectMysql = function() {
     var self = this;
     var pool      =    mysql.createPool({
         connectionLimit : 100,
-        host     : 'localhost',
+        host : 'sql206.epizy.com',
+        user : 'epiz_21698278',
+        password : '25hp0r4g',
+        database : 'epiz_21698278_latlng',
+
+       /* host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'latlng',
-        debug    :  false
+        database : 'latlng',*/
+        debug    :  true
     });
     pool.getConnection(function(err,connection){
         if(err) {

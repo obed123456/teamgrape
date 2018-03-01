@@ -28,7 +28,7 @@
 	   <a href="startpage.html"><li>Home</li></a>
 	   
         <a href="leaderboard.html">
-          <li class="activemenu">Leaderboard</li>
+          <!-- <li class="activemenu">Leaderboard</li> -->
         </a>
         <a href="joinplayer.html">
           <li>Join a Team</li>
@@ -47,7 +47,7 @@
   </nav>
 
 
-  <section class="d-flex align-items-center" style="height: 100vh;">
+  <section class="d-flex align-items-center" style="max-height: auto;">
 
       <div class="container-fluid">
 	  <div class="player">
@@ -150,15 +150,14 @@ fetch('http://localhost:3000/api/getallmatches/')
     response.json()
   .then(function(json) {
       var allmatches = json.Users;
-
       console.log(allmatches);
       let output;
        allmatches.forEach(function(user){
          output += `
-         <ul id="score1" class="score list-group" overflow-y: hidden; overflow-x: hidden;">
+         <ul class="score list-group" overflow-y: hidden; overflow-x: hidden;">
             <li class="list-group-item d-flex justify-content-between align-items-center">${user.uname}
                 <i class="fas fa-trophy"></i>
-                <span class="badge badge-primary badge-pill">${user.totaltime}</span>
+                <span class="badge badge-primary badge-pill">${user.startTime}</span>
               </li>
           </ul>
                
