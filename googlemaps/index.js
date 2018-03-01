@@ -2,7 +2,7 @@ var url;
 var currentUrl;
 var matchcode;
 var urlUserName;
-var api_url = "";
+var api_url = "team-grape.herokuapp.com/api/";
 
 url = window.location; 
 //url with user name and matchcode
@@ -13,7 +13,7 @@ matchcode = currentUrl.substr((currentUrl.length)-5);
 urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 //this will just say that you won whenever we reload the page
-const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+const getAllCorrectAnswer = api_url + 'getmatchbycode/' + matchcode;
 fetch(getAllCorrectAnswer)
 .then(function(response) {
   if(response.ok) {
