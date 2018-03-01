@@ -2,7 +2,7 @@ var url;
 var currentUrl;
 var matchcode;
 var urlUserName;
-var getAllMatches = "http://team-grape.herokuapp.com/api/";
+var getAllMatches = "https://team-grape.herokuapp.com/api/";
 
 url = window.location; 
 //url with user name and matchcode

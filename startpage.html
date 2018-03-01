@@ -103,9 +103,6 @@
 <script>
   //save username from url
   var currentUser = window.location.hash.substr(1);
-console.log(currentUser); 
-console.log(starttime);  
-console.log(matchcode);
   //create random code.
 
   function makeid() {
@@ -143,7 +140,7 @@ function leaderboard() {
     window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
   
 
-     fetch('http://team-grape.herokuapp.com/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
+     fetch('https://team-grape.herokuapp.com/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
        method:'POST',
        headers: {
          'Accept': 'application/json, text/plain, */*',
