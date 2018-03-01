@@ -2,6 +2,7 @@ var url;
 var currentUrl;
 var matchcode;
 var urlUserName;
+var api_url = "";
 
 url = window.location; 
 //url with user name and matchcode
