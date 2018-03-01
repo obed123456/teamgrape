@@ -140,12 +140,7 @@ function leaderboard() {
     window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
   
 
-     fetch('https://team-grape.herokuapp.com/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
-       method:'POST',
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-type':'application/json'
-       },
+     get('https://team-grape.herokuapp.com/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
        body:JSON.stringify({user_name: currentUser})
      })
      .then((res) => res.json())
