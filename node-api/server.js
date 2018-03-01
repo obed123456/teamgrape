@@ -26,10 +26,10 @@ REST.prototype.connectMysql = function() {
     var self = this;
     var pool      =    mysql.createPool({
         connectionLimit : 100,
-        host : 'sql206.epizy.com',
-        user : 'epiz_21698278',
-        password : '25hp0r4g',
-        database : 'epiz_21698278_latlng',
+        host : 'us-cdbr-iron-east-05.cleardb.net',
+        user : 'b1a6f0fbac4688',
+        password : 'dc7a686a',
+        database : 'heroku_6818da3daa3c509',
 
        /* host     : 'localhost',
         user     : 'root',
@@ -58,7 +58,7 @@ REST.prototype.configureExpress = function(connection) {
 
 //Start server at port 3000
 REST.prototype.startServer = function() {
-      app.listen(3000,function(){
+      app.listen(process.env.PORT || 3000,function(){
           console.log("All right ! I am alive at Port 3000.");
       });
 } 
