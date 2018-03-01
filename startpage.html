@@ -113,7 +113,7 @@
     return text;
   }
   var matchcode = makeid();
-
+console.log(matchcode);
 //Start time of match when it starts
   function myFunction() {
     var d = new Date();
@@ -121,7 +121,7 @@
     return n;
 }
 var starttime = myFunction();
-
+console.log(starttime);
 document.getElementById("leaderboard").addEventListener("click", leaderboard);
 
 function leaderboard() {
@@ -140,17 +140,29 @@ function leaderboard() {
     window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
   
 
-     fetch('https://team-grape.herokuapp.com/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
-       method:'POST',
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-type':'application/json'
-       },
-       body:JSON.stringify({user_name: currentUser})
-     })
-     .then((res) => res.json())
-     .then((data) => console.log(data))     
-  }
+  //    fetch('https://team-grape.herokuapp.com/api/startmatch/', {
+  //      method:'POST',
+  //      headers: {
+  //        'Accept': 'application/json, text/plain, */*',
+  //        'Content-type':'application/json'
+  //      },
+  //      body:JSON.stringify({uname: currentUser, matchcode: matchcode, starttime: starttime})
+  //    })
+  //    .then((res) => res.json())
+  //    .then((data) => console.log(data))     
+  // }
+
+  fetch('https://team-grape.herokuapp.com/api/startmatch/', {
+        method:'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({uname: currentUser, matchcode: matchid(), starttime: myFunction()})
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+    }
 
 </script>
 
