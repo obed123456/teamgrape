@@ -80,15 +80,15 @@ fetch(getAllCorrectAnswer)
 
 //get all correct answers. You get only one number
 function addCorrectAnswer() {
-const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
-fetch(getAllCorrectAnswer)
+//const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
+fetch(getAllMatches +'getmatchbycode/' + matchcode)
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
       var markers = json.Users[0].correct_answer;   
       if(!(markers >= 5)){
-        var url = 'http://localhost:3000/api/updatematch/'+ matchcode;
+        var url = getAllMatches +'updatematch/'+ matchcode;
 $.ajax({
   type: "PUT",
   url: url,
