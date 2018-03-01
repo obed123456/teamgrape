@@ -5,9 +5,9 @@
  // $dbPassword = "";
  // $dbName = "loginsystemNew";
 
- $dbServername = "sql206.epizy.com";
- $dbUsername = "epiz_21698278";
- $dbPassword = "25hp0r4g";
- $dbName = "epiz_21698278_latlng";
+ $dbServername = "crockett.highstone.biz";
+ $dbUsername = "grape";
+ $dbPassword = "grape123";
+ $dbName = "grape_ag";
 
  $conn = mysqli_connect( $dbServername, $dbUsername, $dbPassword, $dbName);

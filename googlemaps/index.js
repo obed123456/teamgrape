@@ -2,7 +2,7 @@ var url;
 var currentUrl;
 var matchcode;
 var urlUserName;
-var api_url = "team-grape.herokuapp.com/api/";
+var getAllMatches = "http://team-grape.herokuapp.com/api/";
 
 url = window.location; 
 //url with user name and matchcode
@@ -13,7 +13,7 @@ matchcode = currentUrl.substr((currentUrl.length)-5);
 urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 //this will just say that you won whenever we reload the page
-const getAllCorrectAnswer = api_url + 'getmatchbycode/' + matchcode;
+const getAllCorrectAnswer = getAllMatches + 'getmatchbycode/' + matchcode;
 fetch(getAllCorrectAnswer)
 .then(function(response) {
   if(response.ok) {
@@ -24,7 +24,7 @@ fetch(getAllCorrectAnswer)
         alert("You won!");
 
         // Get the starttime from DB
-        const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+        const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
         fetch(getAllCorrectAnswer)
         .then(function(response) {
           if(response.ok) {
@@ -57,7 +57,7 @@ fetch(getAllCorrectAnswer)
                 console.log(totalTime);
                 
                 // Put the converted format of totaltime in the DB
-                fetch('http://localhost:3000/api/updatematch/' + totalTime + '/' + matchcode, {
+                fetch(getAllMatches + 'updatematch/' + totalTime + '/' + matchcode, {
                   method: 'PUT',  
                   headers: new Headers({
                     'Content-Type': 'application/json'
