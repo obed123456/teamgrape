@@ -32,7 +32,9 @@ function initMap() {
   });
 
 
-const getAllMarkers = 'http://localhost:3000/api/getmarkers/';
+// const getAllMarkers = 'http://localhost:3000/api/getmarkers/';
+
+const getAllMarkers = 'http://team-grape.herokuapp.com/api/getmarkers/';
 fetch(getAllMarkers)
 .then(function(response) {
   if(response.ok) {
