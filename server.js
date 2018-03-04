@@ -31,7 +31,7 @@ REST.prototype.connectMysql = function() {
         password : 'grape123',
         database : 'grape_ag',
 
-       /* host     : 'localhost',
+        /* host     : 'localhost',
         user     : 'root',
         password : '',
         database : 'latlng',*/

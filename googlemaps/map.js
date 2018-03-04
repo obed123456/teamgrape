@@ -18,7 +18,6 @@ var matchcode = currentUrl.substr((currentUrl.length)-5);
 var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 
-
 function initMap() {
 
   // Constructor creates a new map - only center and zoom are required.
