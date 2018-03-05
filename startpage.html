@@ -135,7 +135,7 @@ fetch('https://team-grape.herokuapp.com/api/startmatch/', {
         if(res.ok) {
           return window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
         }
-        throw new Error (' Newtwork response was not ok');
+        throw new Error (' Netwwork response was not ok');
       })
       .then((data) => console.log(data));            
     } 

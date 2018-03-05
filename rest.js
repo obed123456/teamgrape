@@ -183,7 +183,7 @@ router.delete("/deletemarker/:id",function(req,res){
     });
   });
 
-  //put endtime 
+  //put endtime ongoing match if there are 5 correct answer
   router.put("/updatematch/:totaltime/:matchcode",function(req,res){
     var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
     var table = ["match", "totaltime", req.params.totaltime, "matchCode", req.params.matchcode];
@@ -197,6 +197,38 @@ router.delete("/deletemarker/:id",function(req,res){
     });
   });
 
+
+
+  //Here we will add taken markers index add even matchCode and username. 
+  //If we expand out game then we can add even multiple players. 
+
+
+  router.post("/takenmarkers",function(req,res){
+    var query = "INSERT IGNORE INTO ??(??,??,??) VALUES (?,?,?)";
+    var table = ["takenmarkers","matchCode", "uname", "taken",req.body.matchcode, req.body.uname, req.body.taken];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+        }
+    });
+  });
+
+  router.get("/takenmarkersbycode/:matchcode2", function(req,res){
+    var query = "SELECT * FROM ?? WHERE ??=?";
+    var table = ["takenmarkers","matchCode",req.params.matchcode2];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,rows){
+        if(err) {
+            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+        } else {
+            console.log(rows);
+            res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+        }
+    });
+  });
 
 
 }
