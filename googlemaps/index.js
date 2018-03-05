@@ -178,13 +178,9 @@ $(".startclock").click(function(){
     function counter() {
         clicks += 1;
         document.getElementById("counter").innerHTML = clicks;
+		document.getElementById("rett").innerHTML = clicks;
         
-         if (clicks === 5) {
-        alert("You got every single question right GZ!");
-		 $('#\\#myModal').remove();
-		  $('button.btn-primary.knapp').remove();
-		  //Modal, du har klarat av spelet
-    }
+
  }
   
   // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
@@ -216,3 +212,21 @@ losing.src = "losing.mp3";
 function losingsound() {
     losing.play();
 }
+
+ var ggr = 0;
+    function end() {
+        ggr += 1;
+    
+             if (ggr === 5) {
+               setTimeout(function(){ 
+     
+		 $('#\\#myModal').remove();
+		  $('button.btn-primary.knapp').remove();
+		  $('#\\#myModal1').modal('show');
+		    document.querySelector("#rett").style.display = "block";
+       }, 3000);
+		  //Modal, du har klarat av spelet
+    }
+ }
+ 
+ 
