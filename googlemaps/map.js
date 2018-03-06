@@ -1,5 +1,5 @@
 var map, infoWindow, n;
-
+var marker = [];
 // circle around marker
 function arePointsNear(checkPoint, centerPoint, km) {
   var ky = 40000 / 360;
@@ -18,7 +18,7 @@ var matchcode = currentUrl.substr((currentUrl.length)-5);
 var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 // setTimeout(function(){ alert("Hello"); }, 3000);
-setTimeout(function initMap() {
+function initMap() {
 
   // Constructor creates a new map - only center and zoom are required.
   map = new google.maps.Map(document.getElementById('map'), {
@@ -54,7 +54,7 @@ fetch(getAllMarkers)
       console.log(JSON.stringify(markers));
 
       for (var i = empty.length -1; i >= 0; i--){
-      markers.splice(empty[i],1);
+      //markers.splice(empty[i],1);
       console.log(markers);
       }
 
@@ -71,7 +71,7 @@ infoWindow = new google.maps.InfoWindow;
         lat: position.coords.latitude,
         lng: position.coords.longitude,
         EnableHighAccuracy: true,
-        timeout: 3000,
+        timeout: 1000,
         maximumAge: 0,
         distanceFilter: 1,
       };
@@ -85,7 +85,7 @@ infoWindow = new google.maps.InfoWindow;
       //foreach loop will check in which marker and convert into object. 
       //its the same array as location but with objects in it. 
       //console.log(locations);
-      markers.forEach( (element) =>{
+      markers.forEach( (element, index) =>{
         var title = "" + element.id;
         var latlng = {lat: Number(element.marker_lat), lng: Number(element.marker_lng)};       
         markerobjects.push(latlng);        
@@ -96,19 +96,26 @@ infoWindow = new google.maps.InfoWindow;
           //This will check how many markers are there in location array
 
          var questionMarker = './img/checkpoint.png';
-         var marker = new google.maps.Marker({
-           position: latlng,
-           title: title,
-           map: gameMap,
-           icon: questionMarker
-         });
-
-        n = arePointsNear(pos, latlng, 0.02); 
+        
+        console.log("empty: " + empty);
+        if (!empty.includes(index)) {
+          marker.push(new google.maps.Marker({
+            position: latlng,
+            title: title,
+            map: gameMap,
+            icon: questionMarker
+          }));
+          //marker[index].setMap(null);
+          //marker[index].setVisible(false);
+          n = arePointsNear(pos, latlng, 0.02);
+        } else {
+           marker.push({});
+        }
         console.log(n);
         if (n) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
           var currentMarker = latlng;
-          var match = markerobjects.indexOf(currentMarker);
+          match = markerobjects.indexOf(currentMarker);
 
 //This fetch will add maker index together with matchcode and taken. 
 //double index number will not be added or ignored. 
@@ -178,9 +185,9 @@ infoWindow = new google.maps.InfoWindow;
 
 var gameMapCenter
 var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
+  // enableHighAccuracy: true,
+  // timeout: 1000,
+  // maximumAge: 0
 }
 gameMapZoom = 16
 let playerMarker = null
@@ -227,4 +234,4 @@ function setLocation(pos) { // watchPosition callback/High acc
   playerMarker.setPosition(playerPos)
 }
      
-}, 3000);
+}

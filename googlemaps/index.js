@@ -1,4 +1,4 @@
-var url;
+var url, match;
 var currentUrl;
 var matchcode;
 var urlUserName;
@@ -96,7 +96,7 @@ fetch(getAllMatches +'getmatchbycode/' + matchcode)
         url: url,
         data: JSON,
       });
-window.location.href = './leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+//window.location.href = './leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
       } else {
 //if correct answer this will add  +1 in db 
      alert('You already won!');
@@ -143,6 +143,9 @@ document.getElementById("myButton").addEventListener("click", function(){
 // När man trycker på Fel svar, visa Incorrect, samt göm modalbox
 function correct() {
     document.getElementById("test1").innerHTML = "Correct";
+    console.log("match:" + match);
+    marker[match].setMap(null);
+    marker[match].setVisible(false);
 	 setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
 }
 
