@@ -4,11 +4,16 @@
 <head>
   <link rel="stylesheet" type="text/css" href="map.css">
   <link rel="stylesheet" type="text/css" href="css.css">
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+ <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+ <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-  <div id="map"></div>
+  <div id="map">
+  </div>
+  <div id="root"></div>
 <div class="modal fade" id="#myModal" data-dismiss="modal" data-controls-modal="#mymodal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -23,21 +28,30 @@
     <button type="button" class="button1" OnClick="DisableButtons(); incorrect1(); losingsound(); end();">
     <p id="test"></p></button>
 <audio id="bflat"> </audio>
+
  <button type="button" class="button12" OnClick="DisableButtons(); correct();counter(); winningsound(); end();" >
  
+
+ <button type="button" class="button12" OnClick="DisableButtons(); correct();counter(); winningsound();" >
+
  <p id="test1"></p> <!--correct Answer-->
  </button>
 
    <button type="button" class="button1" OnClick="DisableButtons(); incorrect2(); losingsound(); end();"  >
    <p id="test2"></p>
    </button>
+
    
    <button type="button" class="button1" OnClick="DisableButtons(); incorrect3(); losingsound(); end();"  >
+
+
+   <button type="button" class="button1" OnClick="DisableButtons(); incorrect3(); losingsound();"  >
+
      <p id="test3"></p>
 	</button>
  </div>
 </div>
-<center><span id="count"></span></center>	
+<center><span id="count"></span></center>
 <div class="startclock"></div>
 </div>
 </div>
@@ -46,6 +60,7 @@
 </div>
 </div>
 </div>
+
 <center><button class="btn btn-primary knapp startclock" style="margin-top: 5px" id="myButton" onclick="counterss()">Checking position...</button>  
 </center><output id=counter>0</output><p class="correct_answers ">/5 Correct</p>
 </div>
@@ -67,6 +82,27 @@
 </div>
 </div>
 </div>
+
+
+<center><button class="btn btn-primary knapp startclock" style="margin-top: 5px" id="myButton">Checking position...</button>
+</center><output id=counter>0</output><p class="correct_answers ">/5 Correct</p>
+</div>
+<script type="text/babel">
+
+
+class Winning extends React.Component {
+  render() {
+    return (
+      <div className="app">
+        <h1>Congratulations you won!</h1>
+        <img src={"./logo.png"} className="App-logo" alt="logo"/>
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Winning />, document.getElementById('root'));
+
+</script>
 
   <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
   <script src="index.js"></script>

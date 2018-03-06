@@ -4,12 +4,12 @@ var matchcode;
 var urlUserName;
 var getAllMatches = "https://team-grape.herokuapp.com/api/";
 
-url = window.location; 
+url = window.location;
 //url with user name and matchcode
 currentUrl = window.location.hash.substr(1);
 //matchcode from url
 matchcode = currentUrl.substr((currentUrl.length)-5);
-//username from url 
+//username from url
 urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 //this will just say that you won whenever we reload the page
@@ -21,7 +21,19 @@ fetch(getAllCorrectAnswer)
   .then(function(json) {
       var markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
+
         // window.location.href = '/leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+
+        function winning(){
+          document.getElementById('root').style.display = "block";
+          var audio = new Audio('cheering.mp3');
+          audio.play();
+        }
+
+        winning();
+        setTimeout(function(){
+          location.href = 'leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+        }, 5500);
 
         // Get the starttime from DB
         const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
@@ -30,10 +42,10 @@ fetch(getAllCorrectAnswer)
           if(response.ok) {
             response.json()
           .then(function(json) {
-            var startTime; 
-            startTime = json.Users[0].startTime; 
-  
-              
+            var startTime;
+            startTime = json.Users[0].startTime;
+
+
               function totalMatchTime() {
                 var timeInMs;
                 var totalTimeInMs;
@@ -53,12 +65,17 @@ fetch(getAllCorrectAnswer)
                 totalTimeInMs -= minutes * 60;
                 seconds = parseInt(totalTimeInMs % 60, 10);
                 totalTime = (hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds));
-                
+
                 console.log(totalTime);
-                
+
                 // Put the converted format of totaltime in the DB
+
                 fetch(getAllMatches + 'updatematch/' + totalTime + '/' + matchcode, {
                   method: 'PUT',  
+
+                fetch('http://localhost:3000/api/updatematch/' + totalTime + '/' + matchcode, {
+                  method: 'PUT',
+
                   headers: new Headers({
                     'Content-Type': 'application/json'
                   })
@@ -66,8 +83,8 @@ fetch(getAllCorrectAnswer)
                 .catch(error => console.error('Error:', error))
                 .then(response => console.log('Success:', response));
               }
-              totalMatchTime();  
-  
+              totalMatchTime();
+
           })
         }
       })
@@ -86,7 +103,7 @@ fetch(getAllMatches +'getmatchbycode/' + matchcode)
   if(response.ok) {
     response.json()
   .then(function(json) {
-      var markers = json.Users[0].correct_answer;   
+      var markers = json.Users[0].correct_answer;
       if(!(markers >= 5)){
         //comment goes here
         var url = getAllMatches +'updatematch/'+ matchcode;
@@ -98,10 +115,10 @@ fetch(getAllMatches +'getmatchbycode/' + matchcode)
       });
 window.location.href = './leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
       } else {
-//if correct answer this will add  +1 in db 
+//if correct answer this will add  +1 in db
      alert('You already won!');
      //take them to stat page.
-  }      
+  }
   });
 }
 });
@@ -117,7 +134,7 @@ jQuery('.button1').click(function() {
   }
 });
 // Tryck på rättsvar, adda css class som gör att den blir grön
-    jQuery('.button12').click(function() {  
+    jQuery('.button12').click(function() {
     if (!jQuery(this).hasClass('right-answer')) {
     jQuery('.button12').removeClass('right-answer');
     jQuery(this).toggleClass('right-answer');
@@ -149,17 +166,17 @@ function correct() {
 function incorrect1() {
     document.getElementById("test").innerHTML = "Incorrect";
 	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
-	
+
 }
 function incorrect2() {
     document.getElementById("test2").innerHTML = "Incorrect";
 	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
-	
+
 }
 function incorrect3() {
     document.getElementById("test3").innerHTML = "Incorrect";
 	  setTimeout(function(){ $('#\\#myModal').modal('hide'); }, 1000);
-	
+
 }
 
 
@@ -175,17 +192,28 @@ $(".startclock").click(function(){
     if (counter === 0) {
         clearInterval(counter);
     }
-  }, 1000);   
+  }, 1000);
 });
  var clicks = 0;
     function counter() {
         clicks += 1;
         document.getElementById("counter").innerHTML = clicks;
+
 		document.getElementById("rett").innerHTML = clicks;
         
 
+
+
+         if (clicks === 5) {
+        alert("You got every single question right GZ!");
+		 $('#\\#myModal').remove();
+		  $('button.btn-primary.knapp').remove();
+		  //Modal, du har klarat av spelet
+
+    }
+
  }
-  
+
   // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
   var fewSeconds = 16;
 $('#myButton').click(function(){
@@ -216,6 +244,7 @@ function losingsound() {
     losing.play();
 }
 
+
  var ggr = 0;
     function end() {
         ggr += 1;
@@ -233,3 +262,4 @@ function losingsound() {
  }
  
  
+

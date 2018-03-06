@@ -39,7 +39,7 @@ body {
         text-align: left;
         width: 340px;
       }
-	  
+
   #quiz {
   position:relative;
   top:-50px;
@@ -81,7 +81,7 @@ h4 {
 .btn:focus {
  outline:none;
 
-}	
+}
 
 .button1 {
      width: calc(50% - 20px);
@@ -116,12 +116,12 @@ h4 {
 	outline: none;
 }
 
-.wrong-answer{ 
+.wrong-answer{
   background:	red !important;
   border: solid 2px red!important;
   outline: none;
 }
-.right-answer{ 
+.right-answer{
   background:	#7FFF00 !important;
   border: solid 2px #7FFF00 !important;
   outline: none;
@@ -161,7 +161,7 @@ background: linear-gradient(to top,#0f59ff, #1CB5E0 ); /* W3C, IE 10+/ Edge, Fir
 	width:900px;
 	top:500px;
 	right:150px;
-	
+
 }
 }
 .modal-footer {
@@ -181,19 +181,52 @@ color:white !important;
 
 #count {
 	font-size:30px;
-	position:relative;	
+	position:relative;
 }
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 #count {
 	font-size:60px;
-	position:relative;	
+	position:relative;
 	left:-12px;
 }
 }
 #checkpoints{
 	color:white;
 }
-
+#root {
+  position:absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90%;
+  width: 100%;
+  background-color: #5fa9fd;
+  box-shadow: 2px 2px #888888;
+}
+.App-logo{
+  animation: App-logo-spin infinite 2s alternate;
+}
+@keyframes App-logo-spin {
+  from { transform: scale(0.3); }
+  to { transform: scale(1); }
+}
+.app img {
+  width: 25vw;
+}
+.app h1 {
+  font-size: 80px;
+}
 .correct_answers {
 	position:absolute;
 	font-size:20px;
@@ -211,7 +244,12 @@ color:white !important;
 	left:60px;
 	font-family: "Times New Roman", Times, serif;
 }
-
+.app{
+  justify-content: center;
+}
+.app img {
+  width: 50vw;
+}
 }
 output#counter{
 	position:absolute;
@@ -231,6 +269,7 @@ output#counter{
 	left:35px;
 	font-family: "Times New Roman", Times, serif;
 }
+.
 }
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 .knapp {
@@ -238,14 +277,14 @@ output#counter{
 	height:100px;
 	font-size:20px;
 	top:-2px;
-	
-	
+
+
 }
 }
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 #myButton{
 	font-size:40px;
-	
+
 }
 }
 
@@ -285,8 +324,10 @@ output#counter{
 	outline: none;
 	height:100px;
 	font-size:30px;
-	
+
 }
+}
+
 }
 
 
@@ -316,3 +357,4 @@ output#rett{
 	width:300px;
 	height:363px;
 }
+
