@@ -17,9 +17,8 @@ var matchcode = currentUrl.substr((currentUrl.length)-5);
 //username from url 
 var urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
-
-
-function initMap() {
+// setTimeout(function(){ alert("Hello"); }, 3000);
+setTimeout(function initMap() {
 
   // Constructor creates a new map - only center and zoom are required.
   map = new google.maps.Map(document.getElementById('map'), {
@@ -31,14 +30,34 @@ function initMap() {
     mapTypeControl: false,
   });
 
+var empty = [];
+const getAllMarkers = 'https://team-grape.herokuapp.com/api/takenmarkersbycode/' + matchcode;
+fetch(getAllMarkers)
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+    console.log(json);
+//this will sort all the takenmarkers in one array
+    const empty = json.Users.map(user => user.taken).sort((a, b) => a > b);
+    console.log(empty); 
 
-const getAllMarkers = 'http://localhost:3000/api/getmarkers/';
+        
+//Here call all the markers 
+const getAllMarkers = 'https://team-grape.herokuapp.com/api/getmarkers/';
 fetch(getAllMarkers)
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
       var markers = json.Users;
+      console.log(JSON.stringify(markers));
+
+      for (var i = empty.length -1; i >= 0; i--){
+      markers.splice(empty[i],1);
+      console.log(markers);
+      }
+
   
 // TODO: Add google stuff here
 infoWindow = new google.maps.InfoWindow;
@@ -70,8 +89,8 @@ infoWindow = new google.maps.InfoWindow;
         var title = "" + element.id;
         var latlng = {lat: Number(element.marker_lat), lng: Number(element.marker_lng)};       
         markerobjects.push(latlng);        
-        n = arePointsNear(pos, latlng, 0.02); 
-        console.log(n);
+        //n = arePointsNear(pos, latlng, 0.02); 
+        ///console.log(n);
         
 
           //This will check how many markers are there in location array
@@ -84,16 +103,38 @@ infoWindow = new google.maps.InfoWindow;
            icon: questionMarker
          });
 
-
+        n = arePointsNear(pos, latlng, 0.02); 
+        console.log(n);
         if (n) { 
           //Because markerobjects and locations are the same we will remove marker then from location array. 
           var currentMarker = latlng;
           var match = markerobjects.indexOf(currentMarker);
+
+//This fetch will add maker index together with matchcode and taken. 
+//double index number will not be added or ignored. 
+        fetch('https://team-grape.herokuapp.com/api/takenmarkers/', {
+        method:'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({uname: urlUserName, matchcode: matchcode, taken:match})        
+      })
+      .then(function(res) {
+        if(res.ok) {
+          return ("Markerindex " +  match + " added.");
+        }
+        throw new Error ('Netwwork response was not ok');
+      })
+      .then((data) => console.log(data)); 
+
           console.log(match);
+
+    //question will be appear here.
+
           $(document).ready(function(){  
 	        document.getElementById("myButton").style.background='#22db22';
 	        $('button.btn-primary.knapp').text('Answer Question');
-	
 
           document.getElementById('myButton').onclick = function(){
             $('#\\#myModal').modal('show');
@@ -117,11 +158,23 @@ infoWindow = new google.maps.InfoWindow;
     handleLocationError(false, infoWindow, map.getCenter());
   }
      
-    });
-  } else {
-    console.log('Network request for products.json failed with response ');
-  }
-});
+///////////fetch request ends here////////////////
+
+})
+}
+})
+    
+  })
+}
+})
+//////////////////////////////////
+
+
+//    });
+//   } else {
+//     console.log('Network request for products.json failed with response ');
+//   }
+// });
 
 var gameMapCenter
 var options = {
@@ -174,4 +227,4 @@ function setLocation(pos) { // watchPosition callback/High acc
   playerMarker.setPosition(playerPos)
 }
      
-}
+}, 3000);

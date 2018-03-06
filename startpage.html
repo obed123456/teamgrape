@@ -62,12 +62,6 @@
 
                   <form>
                     <div class="form-group">
-                      <!-- <div class="input-group">
-                      <input type="text" class="white-border col-lg-4 offset-lg-4 form-control" id="teamName" placeholder="Create team">
-                        <div class="input-group-append">
-                          <button class="btn btn-success1" id="myBtn" type="submit">Create</button>
-                      </div>
-                    </div> -->
                   </div>
                   </form>
                   <div class="text-center mb-1" id="emptyField"></div><br>
@@ -100,12 +94,12 @@
     <div class="container-fluid" id="startPageBottom"></div>
 
 
+<!-- all JS for this page will goes here -->
 <script>
-  //save username from url
-  var currentUser = window.location.hash.substr(1);
-
+    //save username from url
+    var currentUser = window.location.hash.substr(1);
+  
   //create random code.
-
   function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -115,46 +109,54 @@
   }
   var matchcode = makeid();
 
+
 //Start time of match when it starts
-  function myFunction() {
+  function getStartTime() {
     var d = new Date();
     n = d.getTime();    
     return n;
 }
-var starttime = myFunction();
+var starttime = getStartTime();
 
-document.getElementById("leaderboard").addEventListener("click", leaderboard);
 
-function leaderboard() {
-  window.location.href = 'leaderboard.html?user=#' + currentUser;
-  
-}
+//This will start new match and add in database. We call this function when you click on start match.
+//This will take user to next page aswell
+
+function startNewMatch(){
+fetch('https://team-grape.herokuapp.com/api/startmatch/', {
+        method:'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({uname: currentUser, matchcode: matchcode, starttime:starttime})        
+      })
+      .then(function(res) {
+        if(res.ok) {
+          return window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
+        }
+        throw new Error (' Netwwork response was not ok');
+      })
+      .then((data) => console.log(data));            
+    } 
 
   //this will add user name in menu
   document.getElementById("username").innerHTML = 'User: ' + currentUser;
   //this function will chnage url for google map page with user id and current code 
   //new match row will be created in db  along with uniq match code.
   document.getElementById("joinMatch").addEventListener('click', addPost);
-  function addPost(e){
-     e.preventDefault();
-   
-    window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;
-  
+  function addPost(){   
+    startNewMatch();
+      // window.location.href = 'googlemaps/googlemap.html?user=#' + currentUser + '?matchId=#'+ matchcode;     
+    }
 
-     fetch('http://localhost:3000/api/startmatch/' + currentUser + '/' + matchcode + '/' + starttime, {
-       method:'POST',
-       headers: {
-         'Accept': 'application/json, text/plain, */*',
-         'Content-type':'application/json'
-       },
-       body:JSON.stringify({user_name: currentUser})
-     })
-     .then((res) => res.json())
-     .then((data) => console.log(data))     
-  }
+//This function is to take users back
+document.getElementById("leaderboard").addEventListener("click", leaderboard);
 
+function leaderboard() {
+  window.location.href = 'leaderboard.html?user=#' + currentUser;  
+}
 </script>
-
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqwpwKirHNR8hapcq0pCHGPq94qjDKBhU&callback=initMap"></script>
 <script src="JS/codeGenerator.js"></script>

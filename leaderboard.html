@@ -28,7 +28,7 @@
 	   <a href="startpage.html"><li>Home</li></a>
 	   
         <a href="leaderboard.html">
-          <li class="activemenu">Leaderboard</li>
+          <!-- <li class="activemenu">Leaderboard</li> -->
         </a>
         <a href="joinplayer.html">
           <li>Join a Team</li>
@@ -144,13 +144,12 @@
 //get matchinfo
 
 
-fetch('http://localhost:3000/api/getallmatches/')
+fetch('https://team-grape.herokuapp.com/api/getallmatches/')
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
       var allmatches = json.Users;
-
       console.log(allmatches);
       let output;
        allmatches.forEach(function(user){
