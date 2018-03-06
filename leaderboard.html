@@ -47,9 +47,9 @@
   </nav>
 
 
-  <section class="d-flex align-items-center" style="max-height: auto;">
+  <section class="d-flex align-items-center" style="height: auto; margin-top: 2em; margin-bottom: 2em;">
 
-      <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 100vh;">
 	  <div class="player">
         <span class="fa fa-2x fa-user mx-auto d-block"></span>
         <h4 class="text-white text-center" id="leaderboardUser"></h4>
@@ -154,7 +154,7 @@ fetch('http://team-grape.herokuapp.com/api/getallmatches/')
       let output;
        allmatches.forEach(function(user){
          output += `
-         <ul class="score list-group" overflow-y: hidden; overflow-x: hidden;">
+         <ul class="score list-group" style="max-height: auto; overflow-y: hidden; overflow-x: hidden;">
             <li class="list-group-item d-flex justify-content-between align-items-center">${user.uname}
                 <i class="fas fa-trophy"></i>${user.correct_answer}
                 <span class="badge badge-primary badge-pill">${user.startTime}</span>
