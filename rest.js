@@ -201,8 +201,8 @@ router.delete("/deletemarker/:id",function(req,res){
 
   //Here we will add taken markers index add even matchCode and username. 
   //If we expand out game then we can add even multiple players. 
-
-
+  //ALTER TABLE takenmarkers ADD UNIQUE INDEX(matchCode, uname, taken);
+ //Add above query in db. This will make sure no double entries will register.
   router.post("/takenmarkers",function(req,res){
     var query = "INSERT IGNORE INTO ??(??,??,??) VALUES (?,?,?)";
     var table = ["takenmarkers","matchCode", "uname", "taken",req.body.matchcode, req.body.uname, req.body.taken];
@@ -216,6 +216,8 @@ router.delete("/deletemarker/:id",function(req,res){
     });
   });
 
+
+  //this will get taken marker if matchcode is same
   router.get("/takenmarkersbycode/:matchcode2", function(req,res){
     var query = "SELECT * FROM ?? WHERE ??=?";
     var table = ["takenmarkers","matchCode",req.params.matchcode2];

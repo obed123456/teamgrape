@@ -21,7 +21,7 @@ fetch(getAllCorrectAnswer)
   .then(function(json) {
       var markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
-        alert("You won!");
+        // window.location.href = '/leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
 
         // Get the starttime from DB
         const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
@@ -88,13 +88,15 @@ fetch(getAllMatches +'getmatchbycode/' + matchcode)
   .then(function(json) {
       var markers = json.Users[0].correct_answer;   
       if(!(markers >= 5)){
+        //comment goes here
         var url = getAllMatches +'updatematch/'+ matchcode;
-$.ajax({
-  type: "PUT",
-  url: url,
-  data: JSON,
-});
-        //take them to state page
+
+      $.ajax({
+        type: "PUT",
+        url: url,
+        data: JSON,
+      });
+window.location.href = './leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
       } else {
 //if correct answer this will add  +1 in db 
      alert('You already won!');

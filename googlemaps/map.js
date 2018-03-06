@@ -31,7 +31,7 @@ setTimeout(function initMap() {
   });
 
 var empty = [];
-const getAllMarkers = 'http://localhost:3000/api/takenmarkersbycode/' + matchcode;
+const getAllMarkers = 'https://team-grape.herokuapp.com/api/takenmarkersbycode/' + matchcode;
 fetch(getAllMarkers)
 .then(function(response) {
   if(response.ok) {
