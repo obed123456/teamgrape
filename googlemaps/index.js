@@ -21,6 +21,18 @@ fetch(getAllCorrectAnswer)
       var markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
 
+
+        function winning(){
+          document.getElementById('root').style.display = "block";
+          var audio = new Audio('cheering.mp3');
+          audio.play();
+        }
+
+        winning();
+        setTimeout(function(){
+          location.href = 'leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+        }, 5500);
+
         // Get the starttime from DB
         const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
         fetch(getAllCorrectAnswer)
@@ -55,6 +67,7 @@ fetch(getAllCorrectAnswer)
                 console.log(totalTime);
 
                 // Put the converted format of totaltime in the DB
+
                 fetch('http://localhost:3000/api/updatematch/' + totalTime + '/' + matchcode, {
                   method: 'PUT',
                   headers: new Headers({
@@ -185,6 +198,7 @@ $(".startclock").click(function(){
 		  //Modal, du har klarat av spelet
 
     }
+
  }
 
   // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
@@ -216,3 +230,4 @@ losing.src = "losing.mp3";
 function losingsound() {
     losing.play();
 }
+
