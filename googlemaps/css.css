@@ -259,7 +259,6 @@ output#counter{
 	left:0px;
 	font-family: "Times New Roman", Times, serif;
 }
-
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 output#counter{
 	position:absolute;
@@ -327,34 +326,3 @@ output#counter{
 
 }
 }
-
-}
-
-
-.correct_answerss {
-    position: relative;
-    bottom: 282px;
-  
-    font-size: 200px;
-    color: white;
-    font-family: "Times New Roman", Times, serif;
-}
-
-output#rett{
-	position:relative;
-      color: white;
-    z-index: 30;
-    font-size: 200px;
-   right:120px;
-    font-family: "Times New Roman", Times, serif;
-     
-}
-
-#border {
-	position:relative;
-	 left:41px;
-	top:-30px;
-	width:300px;
-	height:363px;
-}
-
