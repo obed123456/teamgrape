@@ -2,7 +2,6 @@ var url;
 var currentUrl;
 var matchcode;
 var urlUserName;
-var getAllMatches = "https://team-grape.herokuapp.com/api/";
 
 url = window.location;
 //url with user name and matchcode
@@ -13,7 +12,7 @@ matchcode = currentUrl.substr((currentUrl.length)-5);
 urlUserName = currentUrl.substr(0, ((currentUrl.length)-15));
 
 //this will just say that you won whenever we reload the page
-const getAllCorrectAnswer = getAllMatches + 'getmatchbycode/' + matchcode;
+const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
 fetch(getAllCorrectAnswer)
 .then(function(response) {
   if(response.ok) {
@@ -21,9 +20,6 @@ fetch(getAllCorrectAnswer)
   .then(function(json) {
       var markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
-
-        // window.location.href = '/leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
-
         function winning(){
           document.getElementById('root').style.display = "block";
           var audio = new Audio('cheering.mp3');
@@ -32,11 +28,11 @@ fetch(getAllCorrectAnswer)
 
         winning();
         setTimeout(function(){
-          location.href = 'leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+          location.href = '../leaderboard.html' + '#' + urlUserName;
         }, 5500);
 
         // Get the starttime from DB
-        const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
+        const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
         fetch(getAllCorrectAnswer)
         .then(function(response) {
           if(response.ok) {
@@ -69,13 +65,8 @@ fetch(getAllCorrectAnswer)
                 console.log(totalTime);
 
                 // Put the converted format of totaltime in the DB
-
-                fetch(getAllMatches + 'updatematch/' + totalTime + '/' + matchcode, {
-                  method: 'PUT',  
-
                 fetch('http://localhost:3000/api/updatematch/' + totalTime + '/' + matchcode, {
                   method: 'PUT',
-
                   headers: new Headers({
                     'Content-Type': 'application/json'
                   })
@@ -97,23 +88,21 @@ fetch(getAllCorrectAnswer)
 
 //get all correct answers. You get only one number
 function addCorrectAnswer() {
-//const getAllCorrectAnswer = getAllMatches +'getmatchbycode/' + matchcode;
-fetch(getAllMatches +'getmatchbycode/' + matchcode)
+const getAllCorrectAnswer = 'http://localhost:3000/api/getmatchbycode/' + matchcode;
+fetch(getAllCorrectAnswer)
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
       var markers = json.Users[0].correct_answer;
       if(!(markers >= 5)){
-        //comment goes here
-        var url = getAllMatches +'updatematch/'+ matchcode;
-
-      $.ajax({
-        type: "PUT",
-        url: url,
-        data: JSON,
-      });
-window.location.href = './leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
+        var url = 'http://localhost:3000/api/updatematch/'+ matchcode;
+$.ajax({
+  type: "PUT",
+  url: url,
+  data: JSON,
+});
+        //take them to state page
       } else {
 //if correct answer this will add  +1 in db
      alert('You already won!');
@@ -199,11 +188,6 @@ $(".startclock").click(function(){
         clicks += 1;
         document.getElementById("counter").innerHTML = clicks;
 
-		document.getElementById("rett").innerHTML = clicks;
-        
-
-
-
          if (clicks === 5) {
         alert("You got every single question right GZ!");
 		 $('#\\#myModal').remove();
@@ -211,7 +195,6 @@ $(".startclock").click(function(){
 		  //Modal, du har klarat av spelet
 
     }
-
  }
 
   // När man trycker på Answer question, så blir den disable i 16 sekunder, så man ej ska kunna spamma å få nya modalboxes,samt ändrar text på knappen.
@@ -243,23 +226,3 @@ losing.src = "losing.mp3";
 function losingsound() {
     losing.play();
 }
-
-
- var ggr = 0;
-    function end() {
-        ggr += 1;
-    
-             if (ggr === 5) {
-               setTimeout(function(){ 
-     
-		 $('#\\#myModal').remove();
-		  $('button.btn-primary.knapp').remove();
-		  $('#\\#myModal1').modal('show');
-		    document.querySelector("#rett").style.display = "block";
-       }, 3000);
-		  //Modal, du har klarat av spelet
-    }
- }
- 
- 
-
