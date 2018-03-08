@@ -193,40 +193,6 @@ color:white !important;
 #checkpoints{
 	color:white;
 }
-#root {
-  position:absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-.app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 90%;
-  width: 100%;
-  background-color: #5fa9fd;
-  box-shadow: 2px 2px #888888;
-}
-.App-logo{
-  animation: App-logo-spin infinite 2s alternate;
-}
-@keyframes App-logo-spin {
-  from { transform: scale(0.3); }
-  to { transform: scale(1); }
-}
-.app img {
-  width: 25vw;
-}
-.app h1 {
-  font-size: 80px;
-}
 .correct_answers {
 	position:absolute;
 	font-size:20px;
@@ -259,7 +225,6 @@ output#counter{
 	left:0px;
 	font-family: "Times New Roman", Times, serif;
 }
-
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 output#counter{
 	position:absolute;
@@ -326,35 +291,5 @@ output#counter{
 	font-size:30px;
 
 }
-}
-
-}
-
-
-.correct_answerss {
-    position: relative;
-    bottom: 282px;
-  
-    font-size: 200px;
-    color: white;
-    font-family: "Times New Roman", Times, serif;
-}
-
-output#rett{
-	position:relative;
-      color: white;
-    z-index: 30;
-    font-size: 200px;
-   right:120px;
-    font-family: "Times New Roman", Times, serif;
-     
-}
-
-#border {
-	position:relative;
-	 left:41px;
-	top:-30px;
-	width:300px;
-	height:363px;
 }
 
