@@ -26,15 +26,15 @@ REST.prototype.connectMysql = function() {
     var self = this;
     var pool      =    mysql.createPool({
         connectionLimit : 100,
-        host : 'crockett.highstone.biz',
-        user : 'grape',
-        password : 'grape123',
-        database : 'grape_ag',
+        // host : 'crockett.highstone.biz',
+        // user : 'grape',
+        // password : 'grape123',
+        // database : 'grape_ag',
 
-        // host     : 'localhost',
-        // user     : 'root',
-        // password : '',
-        // database : 'latlng',
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'latlng',
         debug    :  true
     });
     pool.getConnection(function(err,connection){
@@ -61,7 +61,7 @@ REST.prototype.startServer = function() {
       app.listen(process.env.PORT || 3000,function(){
           console.log("All right ! I am alive at Port 3000.");
       });
-} 
+}
 
 //Error handlar incase mysql is not up and running.
 REST.prototype.stop = function(err) {
@@ -70,4 +70,3 @@ REST.prototype.stop = function(err) {
 }
 
 new REST();
-
