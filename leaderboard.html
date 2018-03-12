@@ -28,7 +28,7 @@
 	   <a href="startpage.html"><li>Home</li></a>
 	   
         <a href="leaderboard.html">
-          <li class="activemenu">Leaderboard</li>
+          <!-- <li class="activemenu">Leaderboard</li> -->
         </a>
         <a href="joinplayer.html">
           <li>Join a Team</li>
@@ -47,12 +47,12 @@
   </nav>
 
 
-  <section class="d-flex align-items-center" style="height: 100vh;">
+  <section class="d-flex align-items-center" style="height: auto; margin-top: 2em; margin-bottom: 2em;">
 
-      <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 100vh;">
 	  <div class="player">
         <span class="fa fa-2x fa-user mx-auto d-block"></span>
-        <h4 class="text-white text-center">Player 1</h4>
+        <h4 class="text-white text-center" id="leaderboardUser"></h4>
 		</div>
         <hr>
         <ul class="nav nav-pills nav-fill">
@@ -67,31 +67,6 @@
         </div> -->
       <div class="tab-content">
         <div class="tab-pane fade show active" id="score" role="tabpanel">
-          <div>
-            <ul id="score" class="score list-group" style="min-height: 40vh; overflow-y: hidden; overflow-x: hidden;">
-              <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
-                <i class="fas fa-trophy"></i>
-                <span class="badge badge-primary badge-pill">Time: 12:34</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">Team Lemon
-                <i class="fas fa-minus-circle"></i>
-                <span class="badge badge-primary badge-pill">Time: 12:34</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">Team Pinapple
-                <i class="fas fa-minus-circle"></i>
-                <span class="badge badge-primary badge-pill">Time: 12:34</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">Team Grape
-                <i class="fas fa-trophy"></i>
-                <span class="badge badge-primary badge-pill">Time: 12:34</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">Team Apple
-                <i class="fas fa-minus-circle"></i>
-                <span class="badge badge-primary badge-pill">Time: 12:34</span>
-              </li>
-            </ul>
-          </div>
-          <br>
         </div>
         <div class="tab-pane fade" id="rank" role="tabpanel">
           <div>
@@ -133,7 +108,7 @@
               </li>
             </ul>
           </div>
-          <br>
+          </div>
         </div>
       </div>
     </div>
@@ -161,6 +136,39 @@
   </div>
 </div>
 
+<script>
+  
+  var currentUser = window.location.hash.substr(1);
+  document.getElementById("leaderboardUser").innerHTML = currentUser;
+
+//get matchinfo
+
+
+fetch('https://team-grape.herokuapp.com/api/getallmatches/')
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+      var allmatches = json.Users;
+      console.log(allmatches);
+      let output;
+       allmatches.forEach(function(user){
+         output += `
+         <ul class="score list-group" style="max-height: auto; overflow-y: hidden; overflow-x: hidden;">
+            <li class="list-group-item d-flex justify-content-between align-items-center">${user.uname}
+                <i class="fas fa-trophy"></i>
+                <span class="badge badge-primary badge-pill">${user.totaltime}</span>
+              </li>
+          </ul>
+               
+                   `;
+       });
+       document.getElementById('score').innerHTML = output;
+  })
+}
+});
+
+</script>
 
 
 
