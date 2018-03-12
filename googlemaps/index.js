@@ -1,4 +1,4 @@
-var url, match;
+var url, match, markers;
 var currentUrl;
 var matchcode;
 var urlUserName;
@@ -19,7 +19,7 @@ fetch(getAllCorrectAnswer)
   if(response.ok) {
     response.json()
   .then(function(json) {
-      var markers = json.Users[0].correct_answer;
+      markers = json.Users[0].correct_answer;
       if(markers >= 5 ){
         // window.location.href = '/leaderboard.html?user=#' + url.urlUserName + '?matchId=#'+ matchcode;
 
@@ -67,6 +67,7 @@ fetch(getAllCorrectAnswer)
                 .then(response => console.log('Success:', response));
               }
               totalMatchTime();  
+              $('#\\#myModal1').modal('show');
   
           })
         }
@@ -138,7 +139,14 @@ document.getElementById("myButton").addEventListener("click", function(){
 	    jQuery('.button1').removeClass('wrong-answer');
 });
 
+function refresh (){
+  	 setTimeout(function(){ 
+       location.reload(true);
+      }, 3500);
 
+
+
+}
 // När man trycker på rätt svar, visa correct, samt göm modalbox
 // När man trycker på Fel svar, visa Incorrect, samt göm modalbox
 function correct() {
@@ -218,21 +226,63 @@ losing.src = "losing.mp3";
 function losingsound() {
     losing.play();
 }
+var correctAnswer = [];
+fetch("https://team-grape.herokuapp.com/api/getmatchbycode/" + matchcode)
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+      ggr = json.Users[0].correct_answer;  
+      correctAnswer.push(ggr);
 
- var ggr = 0;
-    function end() {
-        ggr += 1;
-    
-             if (ggr === 5) {
+      console.log(Number(correctAnswer[0]));
+      
+      document.querySelector("#counter").innerHTML = correctAnswer[0];
+
+
+
+      function end() {
+        console.log("end reached!");
+        //marker += 1;
+    console.log(typeof correctAnswer[0]);
+             if (Number(correctAnswer[0]) <= 1) {
                setTimeout(function(){ 
      
 		 $('#\\#myModal').remove();
 		  $('button.btn-primary.knapp').remove();
 		  $('#\\#myModal1').modal('show');
-		    document.querySelector("#rett").style.display = "block";
+        document.querySelector("#rett").style.display = "block";
+        document.querySelector("#rett").innerHTML = correctAnswer[0];
        }, 3000);
 		  //Modal, du har klarat av spelet
+    } else {
+      console.log("Not true");
     }
  }
+ 
+
+
+  })
+}
+})
+
+ //ggr;
+// var newEmpty = correctAnswer;
+//  console.log(correctAnswer);
+//     function end() {
+//         //marker += 1;
+    
+//              if (correctAnswer[0] == 1) {
+//                setTimeout(function(){ 
+     
+// 		 $('#\\#myModal').remove();
+// 		  $('button.btn-primary.knapp').remove();
+// 		  $('#\\#myModal1').modal('show');
+//         document.querySelector("#rett").style.display = "block";
+//         document.querySelector("#rett").alert("Hej") = correctAnswer[0];
+//        }, 11000);
+// 		  //Modal, du har klarat av spelet
+//     }
+//  }
  
  
